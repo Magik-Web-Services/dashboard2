@@ -1,0 +1,7 @@
+a{
+    color: black;
+}
+
+.breadcrumb .active a{
+    color: blue !important;
+}
