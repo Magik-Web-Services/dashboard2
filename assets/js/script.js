@@ -1,6 +1,5 @@
 $(document).ready(function () {
     // Data tables
-    // let table = new DataTable('#myTable');
     $('#myTable').DataTable({});
     //   Database
 
@@ -57,22 +56,21 @@ $(document).ready(function () {
     })
 
     // Add new row
+    $(document).on('click', '#Addline', function () {
+        var listitems_c = jQuery('#item_count').val();
+        listitems_c = parseInt(listitems_c) + 1;
+        jQuery('#item_count').val(listitems_c);
+        var extend_items = `<tr class="listitems" data-count='${listitems_c}'>
+        <td><input id="item_name_${listitems_c}" class="itDetail" type="text" placeholder="Type or click to select an item." name="itm_details"></td>
+        <td><input id="item_name_${listitems_c}" class="qty" type="number" value="1.00" name="qty"></td>
+        <td><input id="item_name_${listitems_c}" class="unit" type="text" name="unit"></td>
+        <td><input id="item_name_${listitems_c}" class="rate" type="number" value="0.00" name="rate"></td>
+        <td><input id="item_name_${listitems_c}" class="amount" type="number" value="0.00" name="amount"></td>
+        <td><input id="item_name_${listitems_c}" type="button" value="delete" onclick="deleteRow(this)"/></td>
+    </tr>`;
 
-    var row = `<tr>
-    <td><input class="itDetail" type="text" placeholder="Type or click to select an item." name="itm_details"></td>
-    <td><input class="qty" type="number" value="1.00" name="qty"></td>
-    <td><input class="unit" type="text" name="unit"></td>
-    <td><input class="rate" type="number" value="0.00" name="rate"></td>
-    <td><input class="amount" type="number" value="0.00" name="amount"></td>
-    <td><input type="button" value="delete" onclick="deleteRow(this)"/></td>
-    </tr>  `;
-
-    // Add another line 
-    jQuery('#Addline').click(function () {
-        jQuery('#employee-table tbody').append(row);
-    })
-
-
+        jQuery('#employee-table tbody').append(extend_items);
+    });
 
 
 

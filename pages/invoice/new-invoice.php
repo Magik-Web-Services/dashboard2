@@ -1,4 +1,5 @@
 <?php include('../common/header.php'); ?>
+<?php include('../database/dbconnect.php'); ?>
 
 <body>
     <div class="container-scroller">
@@ -27,11 +28,17 @@
                                 <label for="validationDefault01" class="form-label">Customer name</label>
                                 <select class="form-select form-control" aria-label="Default select example">
                                     <option selected>select customer</option>
-                                    <option value="1">Mr.</option>
-                                    <option value="2">Mrs.</option>
-                                    <option value="3">Miss.</option>
-                                    <option value="3">Ms.</option>
-                                    <option value="3">Dr.</option>
+                                    <?php
+                                    $sql = "SELECT * FROM `dashboard2_customers`";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                        <option value="<?php echo $row["firstName"];
+                                                        echo "&nbsp;";
+                                                        echo $row["lastName"]; ?>"><?php echo $row["firstName"];
+                                                                                    echo "&nbsp;";
+                                                                                    echo $row["lastName"]; ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
 
@@ -90,8 +97,6 @@
 
                                 <div class="card">
                                     <div id="container">
-                                        <!-- <button onclick="addNewRow()">Add New Row
-                                            </button> -->
                                         <button type="button" class="btn btn-primary" id="Addline">Add New Row </button>
                                         <button type="button" class="btn btn-primary" onclick="deleteRow()">Delete Row </button>
                                         <br>

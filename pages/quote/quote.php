@@ -15,12 +15,12 @@
                 <div class="content-wrapper">
                     <div class="page-header">
                         <h3 class="page-title"> New Quote </h3>
-                        <!-- <nav aria-label="breadcrumb">
+                        <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#"> New Quote </a></li>
-                                <li class="breadcrumb-item active" aria-current="page"> New Quote </li>
+                                <li class="breadcrumb-item active"><a href="quote.php">New Quote</a></li>
+                                <li class="breadcrumb-item"><a href="Allquote.php">All Quote</a></li>
                             </ol>
-                        </nav> -->
+                        </nav>
                     </div>
                     <div class="f-row row">
                         <form class="row ">
@@ -112,7 +112,14 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    <tr class="listitems" data-count='1'>
+                                                        <td><input id="item_name_1" class="itDetail" type="text" placeholder="Type or click to select an item." name="itm_details"></td>
+                                                        <td><input id="item_name_1" class="qty" type="number" value="1.00" name="qty"></td>
+                                                        <td><input id="item_name_1" class="unit" type="text" name="unit"></td>
+                                                        <td><input id="item_name_1" class="rate" type="number" value="0.00" name="rate"></td>
+                                                        <td><input id="item_name_1" class="amount" type="number" value="0.00" name="amount"></td>
+                                                        <td><input id="item_name_1" type="button" value="delete" onclick="deleteRow(this)" /></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </form>
@@ -175,6 +182,7 @@
                             <button type="button" class="btn btn-primary">Save as Draft</button>
                             <button type="button" class="btn btn-primary">Save and Send</button>
                             <button type="button" class="btn btn-primary">Cancel</button>
+                            <input type="hidden" value="1" id="item_count" />
                         </div>
                     </div>
 
