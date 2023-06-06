@@ -21,7 +21,7 @@ if (isset($_POST['mDeleteitem'])) {
             //     echo "Customer Not Delete";
             // }
         }
-        header("Location: ../../items/allitem.php");
     }
+    header("Location: ../../items/allitem.php");
 }
 ?>

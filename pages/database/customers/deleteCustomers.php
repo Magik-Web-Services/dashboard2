@@ -23,6 +23,6 @@ if (isset($_POST['mDeleteCus'])) {
             //     echo "Customer Not Delete";
             // }
         }
-        header("Location: ../../customer/allCustomer.php");
     }
+    header("Location: ../../customer/allCustomer.php");
 }
