@@ -74,31 +74,31 @@ $(document).ready(function () {
 
 
 
-    jQuery(document).on('keyup', '.itDetail', function () {
-        let val = $(this).val();
-        let parent = $(this).parent().parent().parent().html();
+    // jQuery(document).on('keyup', '.itDetail', function () {
+    //     let val = $(this).val();
+    //     let parent = $(this).parent().parent().parent().html();
 
-        // console.log(val);
-        let unit = $(this).parents("tr").find(".unit")
-        let rate = $(this).parents("tr").find(".rate")
+    //     // console.log(val);
+    //     let unit = $(this).parents("tr").find(".unit")
+    //     let rate = $(this).parents("tr").find(".rate")
 
-        // console.log(unit);
-        // $(unit).val("hii")
+    //     // console.log(unit);
+    //     // $(unit).val("hii")
 
-        if (val != "") {
-            // Add Data in ITEM DETAILS
-            let array
-            $.ajax({
-                url: "../../pages/database/getData.php",
-                method: "post",
-                dataType: "json",
-                success: function (data) {
-                    array = data;
-                    console.log(array);
-                    $(rate).val(array[3])
-                    $(unit).val(array[2])
-                }
-            })
-        }
-    })
+    //     if (val != "") {
+    //         // Add Data in ITEM DETAILS
+    //         let array
+    //         $.ajax({
+    //             url: "../../pages/database/getData.php",
+    //             method: "post",
+    //             dataType: "json",
+    //             success: function (data) {
+    //                 array = data;
+    //                 console.log(array);
+    //                 $(rate).val(array[3])
+    //                 $(unit).val(array[2])
+    //             }
+    //         })
+    //     }
+    // })
 })

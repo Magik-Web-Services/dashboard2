@@ -113,7 +113,12 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr class="listitems" data-count='1'>
-                                                        <td><input id="item_name_1" class="itDetail" type="text" placeholder="Type or click to select an item." name="itm_details"></td>
+                                                        <td>
+                                                            <select class="selItem" style='width: 200px;'>
+                                                                <option value='0'>- Search Item -</option>
+                                                            </select>
+                                                            <!-- <input id="item_name_1" class="itDetail" type="text" placeholder="Type or click to select an item." name="itm_details"> -->
+                                                        </td>
                                                         <td><input id="item_name_1" class="qty" type="number" value="1.00" name="qty"></td>
                                                         <td><input id="item_name_1" class="unit" type="text" name="unit"></td>
                                                         <td><input id="item_name_1" class="rate" type="number" value="0.00" name="rate"></td>
@@ -197,4 +202,25 @@
     <?php include('../common/footer.php'); ?>
     <script src="<?php echo INV_ASSETS; ?>/js/misc.js"></script>
     <script src="<?php echo INV_ASSETS; ?>/vendors/js/custom.js"></script>
+    <script>
+        $(".selItem").select2({
+            ajax: {
+                url: "../../pages/database/getData.php",
+                type: "post",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        searchTerm: params.term // search term
+                    };
+                },
+                processResults: function(response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
+    </script>
 </body>
