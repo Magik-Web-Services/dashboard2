@@ -221,6 +221,19 @@
                 },
                 cache: true
             }
-        });
+        }).on('select2:select', function(e) {
+            var data = e.params.data;
+            let id = data.id
+            $.ajax({
+                url: "../../pages/database/getData2.php",
+                method: "POST",
+                data: {
+                    id: id
+                },
+                success: function(data) {
+                    console.log(data.sellingPrice);
+                }
+            })
+        });;
     </script>
 </body>
