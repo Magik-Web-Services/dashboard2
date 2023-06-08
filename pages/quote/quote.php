@@ -35,9 +35,9 @@
                                     ?>
                                         <option value="<?php echo $row["firstName"];
                                                         echo "&nbsp;";
-                                                        echo $row["lastName"]; ?>"><?php echo $row["firstName"];
+                                                        echo $row["lastName"]; ?>"><?php echo ucfirst($row["firstName"]);
                                                                                     echo "&nbsp;";
-                                                                                    echo $row["lastName"]; ?></option>
+                                                                                    echo ucfirst($row["lastName"]); ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -90,7 +90,7 @@
                                         <form action="" method="post">
                                             <!-- <button onclick="addNewRow()">Add New Row
                                             </button> -->
-                                            <button type="button" class="btn btn-primary" id="Addline">Add New Row </button>
+                                            <button type="button" class="btn btn-primary" onclick="Ajax()" id="Addline">Add New Row </button>
                                             <button type="button" class="btn btn-primary" onclick="deleteRow()">Delete Row </button>
                                             <br>
                                             <br>
@@ -112,18 +112,17 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr class="listitems" data-count='1'>
+                                                    <tr class="listitems" id="itemId_1">
                                                         <td>
-                                                            <select class="selItem" style='width: 200px;'>
+                                                            <select class="selItem" id="item_item_1" style='width: 200px;'>
                                                                 <option value='0'>- Search Item -</option>
                                                             </select>
-                                                            <!-- <input id="item_name_1" class="itDetail" type="text" placeholder="Type or click to select an item." name="itm_details"> -->
                                                         </td>
-                                                        <td><input id="item_name_1" class="qty" type="number" value="1.00" name="qty"></td>
-                                                        <td><input id="item_name_1" class="unit" type="text" name="unit"></td>
-                                                        <td><input id="item_name_1" class="rate" type="number" value="0.00" name="rate"></td>
-                                                        <td><input id="item_name_1" class="amount" type="number" value="0.00" name="amount"></td>
-                                                        <td><input id="item_name_1" type="button" value="delete" onclick="deleteRow(this)" /></td>
+                                                        <td><input onchange="calculate(this)" id="item_qty_1" class="qty" type="number" value="1" name="qty"></td>
+                                                        <td><input id="item_unit_1" class="unit" type="text" name="unit"></td>
+                                                        <td><input onchange="calculate(this)" id="item_rate_1" class="rate" type="number" value="0" name="rate"></td>
+                                                        <td><input onchange="calculate(this)" readonly id="item_amount_1" class="amount" type="number" value="0" name="amount"></td>
+                                                        <td><input id="item_delete_1" type="button" value="delete" onclick="deleteRow(this)" /></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -136,24 +135,24 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <label for="validationDefault01" class="form-label">Sub Total</label>
-                                    <input type="text" class="form-control" placeholder="0.00">
+                                    <input type="text" id="Sub_Total" readonly onchange="calculate2(this)" class="form-control" placeholder="0.00">
                                 </div>
                                 <div class="col-md-5">
-                                    <label for="validationDefault01" class="form-label">Discount</label>
-                                    <select id="inputState" class="form-select">
-                                        <option selected>Select Discount</option>
-                                        <option value="1">%</option>
-                                        <option value="2">$</option>
-
-
-                                    </select>
+                                    <label for="Discount" class="form-label">Discount</label>
+                                    <div class="d-flex">
+                                        <input class="form-control" onchange="calculate2(this)" id="Discount" type="number" value="0" name="Discount">
+                                        <select id="selectTax" onchange="calculate2(this)" class="form-select">
+                                            <option selected value="%">%</option>
+                                            <option value="$">$</option>
+                                        </select>
+                                    </div>
                                 </div>
-
                             </div>
+
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label for="validationDefault01" class="form-label">Adjustment</label>
-                                    <input type="text" class="form-control" placeholder="0.00">
+                                    <label for="Adjustment" class="form-label">Adjustment</label>
+                                    <input type="text" id="Adjustment" onchange="calculate2(this)" class="form-control" placeholder="0.00">
                                 </div>
                                 <div class="col-md-5">
                                     <label for="inputState" class="form-label">TCS</label>
@@ -163,77 +162,101 @@
                                         <option value="2">hardware tax</option>
                                     </select>
                                 </div>
-
                             </div>
-                    </div>
-                    </form>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="validationDefault01" class="form-label">Total</label>
+                                    <input type="text" onchange="calculate2(this)" id="total" readonly class="form-control" placeholder="0.00">
+                                </div>
+                            </div>
+                        </form>
 
-                    <div class="file-up">
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-floating">
-                                    <label for="floatingTextarea2">Terms And Conditions</label>
-                                    <textarea class="form-control" placeholder="Terms And Conditions" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <div class="file-up">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <label for="floatingTextarea2">Terms And Conditions</label>
+                                        <textarea class="form-control" placeholder="Terms And Conditions" id="floatingTextarea2" style="height: 100px"></textarea>
+
+                                    </div>
+                                </div>
+                                <div class="col upload-bg">
+                                    <input type="file" id="myFile">
+                                    <p>Attach File(s) to Quote</p>
 
                                 </div>
                             </div>
-                            <div class="col upload-bg">
-                                <input type="file" id="myFile">
-                                <p>Attach File(s) to Quote</p>
-
+                            <div class="pd">
+                                <button type="button" class="btn btn-primary">Save as Draft</button>
+                                <button type="button" class="btn btn-primary">Save and Send</button>
+                                <button type="button" class="btn btn-primary">Cancel</button>
+                                <input type="hidden" value="1" id="item_count" />
                             </div>
                         </div>
-                        <div class="pd">
-                            <button type="button" class="btn btn-primary">Save as Draft</button>
-                            <button type="button" class="btn btn-primary">Save and Send</button>
-                            <button type="button" class="btn btn-primary">Cancel</button>
-                            <input type="hidden" value="1" id="item_count" />
-                        </div>
                     </div>
-
-                    <!-- <div> <label id="switch" class="switch">
-                            <input type="checkbox" onchange="toggleTheme()" id="slider">
-                            <span class="slider round"></span>
-                        </label></div> -->
+                    <footer class="footer">
+                        <div class="footer-inner-wraper">
+                            <div class="d-sm-flex justify-content-center justify-content-sm-between py-2">
+                                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
+                                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best <a href="https://www.bootstrapdash.com/" target="_blank"> Bootstrap dashboard </a> templates</span>
+                            </div>
+                        </div>
+                    </footer>
                 </div>
             </div>
         </div>
-    </div>
-    <?php include('../common/footer.php'); ?>
-    <script src="<?php echo INV_ASSETS; ?>/js/misc.js"></script>
-    <script src="<?php echo INV_ASSETS; ?>/vendors/js/custom.js"></script>
-    <script>
-        $(".selItem").select2({
-            ajax: {
-                url: "../../pages/database/getData.php",
-                type: "post",
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        searchTerm: params.term // search term
-                    };
-                },
-                processResults: function(response) {
-                    return {
-                        results: response
-                    };
-                },
-                cache: true
+        <?php include('../common/footer.php'); ?>
+        <script src="<?php echo INV_ASSETS; ?>/js/misc.js"></script>
+        <script src="<?php echo INV_ASSETS; ?>/vendors/js/custom.js"></script>
+        <script>
+            const Ajax = () => {
+                $(".selItem").select2({
+                    ajax: {
+                        url: "../../pages/database/getData.php",
+                        type: "post",
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            let ele = this[0].parentNode.parentNode.id
+                            return {
+                                searchTerm: params.term, // search term
+                                Element: ele
+                            };
+                        },
+                        processResults: function(response) {
+                            return {
+                                results: response
+                            };
+                        },
+                        cache: true
+                    }
+                }).on('select2:select', function(e) {
+                    let data = e.params.data;
+                    let ele = data.ele;
+                    let dataId = data.id
+                    $.ajax({
+                        url: "../../pages/database/getData2.php",
+                        type: "post",
+                        dataType: 'json',
+                        delay: 250,
+                        data: {
+                            dataId: dataId
+                        },
+                        success: function(response) {
+                            // Unit
+                            jQuery("#" + jQuery(ele)[0].childNodes[5].childNodes[0].id).val(response[0].unit)
+                            // Rate
+                            jQuery("#" + jQuery(ele)[0].childNodes[7].childNodes[0].id).val(response[0].sellingPrice)
+                            // Calaculate
+                            calculate(jQuery(ele)[0].childNodes[1].childNodes[1]);
+                            // console.log(jQuery(ele)[0].childNodes[1].childNodes[1].id);
+                        },
+                        cache: true
+                    })
+                });;
             }
-        }).on('select2:select', function(e) {
-            var data = e.params.data;
-            let id = data.id
-            $.ajax({
-                url: "../../pages/database/getData2.php",
-                method: "POST",
-                data: {
-                    id: id
-                },
-                success: function(data) {
-                    console.log(data.sellingPrice);
-                }
-            })
-        });;
-    </script>
+            Ajax()
+        </script>
 </body>
+
+</html>

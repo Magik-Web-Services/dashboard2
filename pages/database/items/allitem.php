@@ -10,7 +10,7 @@ while ($row = $result->fetch_assoc()) {
                 <!-- <td style='display:none'>" . $row["itemId"] . "</td>-->
                 <td>" . ucfirst($row["name"]) . "</td>
                 <td>" . $row["description"] . "</td>
-                <td>" . $row["sellingPrice"] . "</td>
+                <td> $ " . $row["sellingPrice"] . "</td>
                 <td>" . $row["unit"] . "</td>
                 <td>
                 <a href='#'>

@@ -102,20 +102,36 @@
                                         <br>
                                         <br>
                                         <table id="employee-table">
-                                            <tr>
-                                                <th>ITEM DETAILS
-                                                </th>
-                                                <th>QUANTITY
-                                                </th>
-                                                <th>Unit
-                                                </th>
-                                                <th>RATE
-                                                </th>
-                                                <th>AMOUNT
-                                                </th>
-                                                <th>Action
-                                                </th>
-                                            </tr>
+                                            <thead>
+                                                <tr>
+                                                    <th>ITEM DETAILS
+                                                    </th>
+                                                    <th>QUANTITY
+                                                    </th>
+                                                    <th>Unit
+                                                    </th>
+                                                    <th>RATE
+                                                    </th>
+                                                    <th>AMOUNT
+                                                    </th>
+                                                    <th>Action
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="listitems" id="itemId_1">
+                                                    <td>
+                                                        <select class="selItem" id="item_item_1" style='width: 200px;'>
+                                                            <option value='0'>- Search Item -</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><input onchange="calculate(this)" id="item_qty_1" class="qty" type="number" value="1" name="qty"></td>
+                                                    <td><input id="item_unit_1" class="unit" type="text" name="unit"></td>
+                                                    <td><input onchange="calculate(this)" id="item_rate_1" class="rate" type="number" value="0" name="rate"></td>
+                                                    <td><input onchange="calculate(this)" id="item_amount_1" class="amount" type="number" value="0" name="amount"></td>
+                                                    <td><input id="item_delete_1" readonly type="button" value="delete" onclick="deleteRow(this)" /></td>
+                                                </tr>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -176,10 +192,72 @@
                             <button type="button" class="btn btn-primary">Save as Draft</button>
                             <button type="button" class="btn btn-primary">Save and Send</button>
                             <button type="button" class="btn btn-primary">Cancel</button>
+                            <input type="hidden" value="1" id="item_count" />
                         </div>
                     </div>
-
-                    <!-- common:../../commons/_footer.html -->
-                    <?php include('../../pages/common/footer.php'); ?>
-                    <script src="<?php echo INV_ASSETS; ?>/js/misc.js"></script>
-                    <script src="<?php echo INV_ASSETS; ?>/vendors/js/custom.js"></script>
+                </div>
+                <footer class="footer">
+                    <div class="footer-inner-wraper">
+                        <div class="d-sm-flex justify-content-center justify-content-sm-between py-2">
+                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
+                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best <a href="https://www.bootstrapdash.com/" target="_blank"> Bootstrap dashboard </a> templates</span>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <?php include('../common/footer.php'); ?>
+    <script src="<?php echo INV_ASSETS; ?>/js/misc.js"></script>
+    <script src="<?php echo INV_ASSETS; ?>/vendors/js/custom.js"></script>
+    <script>
+        const Ajax = () => {
+            $(".selItem").select2({
+                ajax: {
+                    url: "../../pages/database/getData.php",
+                    type: "post",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        let ele = this[0].parentNode.parentNode.id
+                        return {
+                            searchTerm: params.term, // search term
+                            Element: ele
+                        };
+                    },
+                    processResults: function(response) {
+                        return {
+                            results: response
+                        };
+                    },
+                    cache: true
+                }
+            }).on('select2:select', function(e) {
+                let data = e.params.data;
+                let ele = data.ele;
+                let dataId = data.id
+                $.ajax({
+                    url: "../../pages/database/getData2.php",
+                    type: "post",
+                    dataType: 'json',
+                    delay: 250,
+                    data: {
+                        dataId: dataId
+                    },
+                    success: function(response) {
+                        // Unit
+                        jQuery("#" + jQuery(ele)[0].childNodes[5].childNodes[0].id).val(response[0].unit)
+                        // Rate
+                        jQuery("#" + jQuery(ele)[0].childNodes[7].childNodes[0].id).val(response[0].sellingPrice)
+                        // Calaculate
+                        calculate(jQuery(ele)[0].childNodes[1].childNodes[1]);
+                        // console.log(jQuery(ele)[0].childNodes[1].childNodes[1].id);
+                    },
+                    cache: true
+                })
+            });;
+        }
+        Ajax()
+    </script>
+</body>
+</html>

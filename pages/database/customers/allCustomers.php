@@ -8,7 +8,7 @@ while ($row = $result->fetch_assoc()) {
             <tr>
                 <td><input type='checkbox' name='mdeleteIdCus[]' value='" .  $row["customerId"] . "'></td>
                 <!-- <td style='display:none'>" . $row["customerId"] . "</td>-->
-                <td>" . ucfirst($row["firstName"]) ."&nbsp;". $row["lastName"] ."</td>
+                <td>" . ucfirst($row["firstName"]) ."&nbsp;". ucfirst($row["lastName"]) ."</td>
                 <td>" . $row["companyName"] . "</td>
                 <td>" . $row["customerEmail"] . "</td>
                 <td>" . $row["customerPhone"] . "</td>
