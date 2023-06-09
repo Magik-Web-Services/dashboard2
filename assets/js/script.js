@@ -121,37 +121,31 @@ function calculate2(id) {
         Sub_Total = jQuery('#Sub_Total').val() ? jQuery('#Sub_Total').val() : 0,
         Discount = jQuery('#Discount').val() ? jQuery('#Discount').val() : 0,
         Adjustment = jQuery('#Adjustment').val() ? jQuery('#Adjustment').val() : 0,
-        selectTax = jQuery('#selectTax'),
-        total = jQuery('#total')
-    let tax = jQuery('#selectTax').find(':selected').val()
-
-
+        total = jQuery('#total'),
+        tax = jQuery('#selectTax').find(':selected').val()
 
     if (item_id) {
         switch (item_id) {
-            case 'Adjustment':
-                console.log('Adjustment');
-                let Adjus = parseInt(Sub_Total) + parseInt(Adjustment);
-                jQuery('#total').val(Adjus);
-                break;
             case 'Discount':
-                console.log('Discount');
                 switch (tax) {
                     case '$':
-                        console.log('$');
-                        let discount$ = parseInt(Sub_Total) - parseInt(Adjustment);
+                        let discount$ = parseInt(Sub_Total) - parseInt(Discount) + parseInt(Adjustment);
                         jQuery('#total').val(discount$);
                         break;
                     case '%':
-                        console.log('%');
-                        let dis = parseInt(Sub_Total) - ((parseInt(Sub_Total) * parseInt(Discount)) / 100);
-                        // let dis2 = parseInt(Sub_Total) - parseInt(dis);
-                        // console.log(dis2);
+                        let dis = parseInt(Sub_Total) - ((parseInt(Sub_Total) * parseInt(Discount)) / 100) + parseInt(Adjustment);
                         jQuery('#total').val(dis);
                         break;
                     default:
                         break;
                 }
+                break;
+            case 'Adjustment':
+                var Dis = (tax == "%") ? (parseInt(Sub_Total) - parseInt(Discount) + parseInt(Adjustment)) : (parseInt(Sub_Total) - ((parseInt(Sub_Total) * parseInt(Discount)) / 100) + parseInt(Adjustment))
+
+                let Adjus = eval(parseInt(Sub_Total) + parseInt(Adjustment) - parseInt(Dis));
+                jQuery('#total').val(Dis);
+                break;
         }
     }
 }
