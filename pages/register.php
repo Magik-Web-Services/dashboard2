@@ -9,15 +9,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     // Check whether this username exists
-    $existSql = "SELECT * FROM `dashboard2_accounts` WHERE email = '$email'";
+    $existSql = "SELECT * FROM `dashboard2_users` WHERE email = '$email' OR userName = '$userName'";
     $result = mysqli_query($conn, $existSql);
     $numExistRows = mysqli_num_rows($result);
 
     if ($numExistRows > 0) {
-        echo '<script>alert("Email Already Exists!")</script>';
+        echo '<script>alert("User Already Exists!")</script>';
     } else {
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO `dashboard2_accounts` (`userName`, `email`, `country`, `password`) VALUES ('$userName', '$email', '$Country', '$hash');";
+        $sql = "INSERT INTO `dashboard2_users` (`userName`, `email`, `country`, `password`, `role`) VALUES ('$userName', '$email', '$Country', '$hash', 'customers');";
         $result2 = mysqli_query($conn, $sql);
         if ($result2) {
             echo '<script>alert("You are Signup")</script>';

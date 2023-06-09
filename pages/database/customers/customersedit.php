@@ -11,7 +11,7 @@ if (isset($_POST['Customersedit'])) {
     $companyName = $_POST['companyName'];
     $Website = $_POST['Website'];
 
-    $editSql = "UPDATE `dashboard2_customers` SET `customerType`='$customerType',`salutation`='$salutation',`firstName`='$Fname',`lastName`='$Lname',`customerPhone`='$customerPhone',`customerEmail`='$customerEmail',`companyName`='$companyName',`Website`='$Website' WHERE `customerId` = $sno";
+    $editSql = "UPDATE `dashboard2_customers` SET `customerType`='$customerType',`salutation`='$salutation',`firstName`='$Fname',`lastName`='$Lname',`customerPhone`='$customerPhone',`customerEmail`='$customerEmail',`companyName`='$companyName',`Website`='$Website' `Modified_Date`=CURRENT_TIMESTAMP() WHERE `customerId` = $sno";
 
     // `update_customer`='[value-16]'
 

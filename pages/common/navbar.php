@@ -34,7 +34,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
             <img src="<?php echo INV_ASSETS; ?>/images/faces/logo1.jpg" alt="image">
           </div>
           <div class="nav-profile-text">
-            <p class="mb-1 text-black"><?php echo $_SESSION['username'] ?></p>
+            <p id="<?php echo $_SESSION['userID'] ?>" class="mb-1 text-black user_Name"><?php echo $_SESSION['username'] ?></p>
           </div>
         </a>
         <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
@@ -46,7 +46,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
             <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
               <span>Inbox</span>
               <span class="p-0">
-                <span class="badge badge-primary">3</span>
+                <span class="badge badge-primary"> 3</span>
                 <i class="mdi mdi-email-open-outline ms-1"></i>
               </span>
             </a>

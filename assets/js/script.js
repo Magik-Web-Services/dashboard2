@@ -1,7 +1,44 @@
 $(document).ready(function () {
+
+    let id = jQuery('.user_Name')[0].id;
+    jQuery('#user_id').val(id)
+    // console.log(id);
+
     // Data tables
     $('#myTable').DataTable({});
-    //   Database
+
+    // User
+
+    // editUser
+    jQuery(document).on('click', '.edituser', function () {
+        jQuery('#save_btn').addClass("d-none")
+        jQuery('#edit_btn').removeClass("d-none")
+        jQuery('#user_id').val(jQuery(this).attr('id'));
+        if (jQuery.trim(jQuery(this).parent().parent().parent().find('td')[0].innerText)) {
+            jQuery('#user-name').val(jQuery.trim(jQuery(this).parent().parent().parent().find('td')[0].innerText));
+        }
+        if (jQuery.trim(jQuery(this).parent().parent().parent().find('td')[1].innerText)) {
+            jQuery('#user-email').val(jQuery.trim(jQuery(this).parent().parent().parent().find('td')[1].innerText));
+        }
+        if (jQuery.trim(jQuery(this).parent().parent().parent().find('td')[2].innerText)) {
+            jQuery('#user-country').val(jQuery.trim(jQuery(this).parent().parent().parent().find('td')[2].innerText)).change();
+        }
+        if (jQuery.trim(jQuery(this).parent().parent().parent().find('td')[3].innerText)) {
+            jQuery('#user-role').val(jQuery.trim(jQuery(this).parent().parent().parent().find('td')[3].innerText)).change();
+        }
+    });
+
+    // deleteUser
+    let deleteUser = jQuery('.deleteUser');
+    Array.from(deleteUser).forEach(element => {
+        element.addEventListener("click", (e) => {
+            sno = e.target.id
+
+            if (confirm("Are you sure you want to delete this User!")) {
+                window.location = `../../pages/database/users/userDelete.php?userDelete=${sno}`;
+            }
+        })
+    })
 
     // Customers
     // Customerdeletes
@@ -149,3 +186,4 @@ function calculate2(id) {
         }
     }
 }
+

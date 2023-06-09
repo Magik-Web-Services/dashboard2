@@ -23,6 +23,7 @@
                     </div>
 
                     <form class="row f-row" method="post" action="../database/items/creteItem.php">
+                    <input type="hidden" name="user_id" id="user_id">
                         <div class="col-md-12 f-nm">
                             <label for="Types" class="form-label">Type</label>
                             <input class="form-check-input" type="radio" name="Types" checked id="inlineRadio1" value="Good">

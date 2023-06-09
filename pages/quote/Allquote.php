@@ -27,10 +27,10 @@
                                 <tr>
                                     <th>#</th>
                                     <!-- <th style="display: none;"></th> -->
-                                    <th>NAME</th>
-                                    <th>DESCRIPTION</th>
-                                    <th>RATE</th>
-                                    <th>USAGE UNIT</th>
+                                    <th>Date</th>
+                                    <th>Order Number</th>
+                                    <th>Customer name</th>
+                                    <th>Total</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>

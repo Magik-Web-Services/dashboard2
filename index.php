@@ -7,17 +7,19 @@ $login = false;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userName = $_POST["username"];
     $password = $_POST["password"];
-    $sql = "Select * from `dashboard2_accounts` where userName='$userName'";
+    $sql = "Select * from `dashboard2_users` WHERE userName='$userName'";
     $result = mysqli_query($conn, $sql);
     $num = mysqli_num_rows($result);
     if ($num == 1) {
         while ($row = mysqli_fetch_assoc($result)) {
             if (password_verify($password, $row['password'])) {
                 echo '<script>alert("Login!")</script>';
+                $sno = $row["sno"];
                 $login = true;
                 session_start();
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $userName;
+                $_SESSION['userID'] = $sno;
                 header("location: pages/dashboard.php");
             } else {
                 echo '<script>alert("Invalid Credentials!")</script>';

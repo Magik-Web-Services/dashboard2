@@ -8,6 +8,12 @@
       </a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" href="<?php echo SITE_URL; ?>pages/users/user.php">
+        <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
+        <span class="menu-title">New User</span>
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="<?php echo SITE_URL; ?>pages/customer/customer.php">
         <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
         <span class="menu-title">New Customer</span>
