@@ -24,6 +24,7 @@
 
 
                     <form class="row f-row" action="../database/customers/createCustomer.php" method="post">
+                        <input type="hidden" name="user_id" id="user_id">
                         <div class="col-md-12 ">
                             <label for="Customer_Type" class="form-label">Customer Type</label>
                             <input class="form-check-input" type="radio" name="Customer_Type" checked id="inlineRadio1" value="Business">

@@ -11,16 +11,18 @@ if (isset($_POST['Customersedit'])) {
     $companyName = $_POST['companyName'];
     $Website = $_POST['Website'];
 
-    $editSql = "UPDATE `dashboard2_customers` SET `customerType`='$customerType',`salutation`='$salutation',`firstName`='$Fname',`lastName`='$Lname',`customerPhone`='$customerPhone',`customerEmail`='$customerEmail',`companyName`='$companyName',`Website`='$Website' `Modified_Date`=CURRENT_TIMESTAMP() WHERE `customerId` = $sno";
+    $editSql = "UPDATE `dashboard2_customers` SET `customerType`='$customerType',`salutation`='$salutation',`firstName`='$Fname',`lastName`='$Lname',`customerPhone`='$customerPhone',`customerEmail`='$customerEmail',`companyName`='$companyName',`Website`='$Website', `Modified_Date`=CURRENT_TIMESTAMP() WHERE `customerId` = '$sno'";
 
     // `update_customer`='[value-16]'
 
+    echo "Update";
+
     $editServer = mysqli_query($conn, $editSql);
     
-    // if ($editServer) {
-    //     echo " Update";
-    // } else {
-    //     echo "Customer Not Update";
-    // }
+    if ($editServer) {
+        echo "Customer Update";
+    } else {
+        echo "Customer Not Update";
+    }
     header("Location: ../../customer/allCustomer.php");
 }

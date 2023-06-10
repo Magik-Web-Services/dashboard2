@@ -84,6 +84,29 @@ $(document).ready(function () {
         })
     })
 
+
+    // Quote
+
+    // Quotedeletes
+    let Quotedeletes = jQuery('.quotedelete');
+    Array.from(Quotedeletes).forEach(element => {
+        element.addEventListener("click", (e) => {
+            sno = e.target.id
+            if (confirm("Are you sure you want to delete this Quote!")) {
+                window.location = `../../pages/database/quote/deleteQuote.php?deleteQuote=${sno}`;
+            }
+        })
+    })
+
+        // quoteedit
+        let quoteedit = jQuery('.quoteEdit');
+        Array.from(quoteedit).forEach(element => {
+            element.addEventListener("click", (e) => {
+                sno = e.target.id
+                window.location = `../../pages/quote/editQuote.php?editQuote=${sno}`;
+            })
+        })
+
     // Logout
 
     $("#Logout").click(function () {
@@ -98,18 +121,19 @@ $(document).ready(function () {
         listitems_c = parseInt(listitems_c) + 1;
         jQuery('#item_count').val(listitems_c);
         var extend_items = `
-<tr class="listitems" id="itemId_${listitems_c}">
-<td>
-    <select class="selItem" id="item_item_${listitems_c}" style='width: 200px;'>
-        <option value='0'>- Search Item -</option>
-    </select>
-</td>
-<td><input onchange="calculate(this)" id="item_qty_${listitems_c}" class="qty" type="number" value="1" name="qty"></td>
-<td><input id="item_unit_${listitems_c}" class="unit" type="text" name="unit"></td>
-<td><input onchange="calculate(this)" id="item_rate_${listitems_c}" class="rate" type="number" value="0" name="rate"></td>
-<td><input onchange="calculate(this)" id="item_amount_${listitems_c}" readonly class="amount" type="number" value="0" name="amount"></td>
-<td><input id="item_delete_${listitems_c}" type="button" value="delete" onclick="deleteRow(this)" /></td>
-</tr>
+        <tr class="listitems" id="itemId_${listitems_c}">
+        <td>
+            <input type="hidden" id="item_name_${listitems_c}" name="name[]">
+            <select class="selItem" id="item_item_${listitems_c}" style='width: 200px;'>
+                <option disabled value='0'>- Search Item -</option>
+            </select>
+        </td>
+        <td><input onchange="calculate(this)" id="item_qty_${listitems_c}" class="qty" name="qty[]" type="number" value="1" name="qty"></td>
+        <td><input id="item_unit_${listitems_c}" class="unit" readonly type="text" name="unit[]"></td>
+        <td><input onchange="calculate(this)" readonly id="item_rate_${listitems_c}" class="rate" type="number" value="0" name="rate[]"></td>
+        <td><input onchange="calculate(this)" readonly id="item_amount_${listitems_c}" class="amount" type="number" value="0" name="amount[]"></td>
+        <td><input id="item_delete_${listitems_c}" type="button" value="delete" onclick="deleteRow(this)" /></td>
+    </tr>
     `;
 
         jQuery('#employee-table tbody').append(extend_items);

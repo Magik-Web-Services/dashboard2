@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `dashboard2_quote` (
   `quote_id` int NOT NULL AUTO_INCREMENT,
   `customerName` varchar(255) NOT NULL,
   `invoice` varchar(255) NOT NULL,
-  `qrderNumber` varchar(255) NOT NULL,
+  `orderNumber` varchar(255) NOT NULL,
   `quoteDate` date NOT NULL,
   `expireyDate` date NOT NULL,
   `salesperson` varchar(255) NOT NULL,
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `dashboard2_quote` (
 -- Dumping data for table `dashboard2_quote`
 --
 
-INSERT INTO `dashboard2_quote` (`quote_id`, `customerName`, `invoice`, `qrderNumber`, `quoteDate`, `expireyDate`, `salesperson`, `subject`, `subTotal`, `Discount`, `Adjustment`, `TCS`, `total`, `termsAndConditions`, `creation_Date`) VALUES
+INSERT INTO `dashboard2_quote` (`quote_id`, `customerName`, `invoice`, `orderNumber`, `quoteDate`, `expireyDate`, `salesperson`, `subject`, `subTotal`, `Discount`, `Adjustment`, `TCS`, `total`, `termsAndConditions`, `creation_Date`) VALUES
 (1, 'atul goyal', '1', '', '2023-06-01', '2023-06-03', '3', 'zx', '', '23', '3431', 'Select a tax', '', 'iiuhiu', '2023-06-09 06:34:27'),
 (2, 'atul goyal', '2', '2', '2023-06-02', '2023-06-03', '1', 'Subject', '', '10', '20', '2', '', 'Terms And Conditions', '2023-06-09 06:34:27'),
 (3, 'atul goyal', '09', '09', '2023-06-01', '2023-06-02', '1', 'Subject', '122', '10', '20', 'Select a tax', '132', 'TS', '2023-06-09 06:34:27'),

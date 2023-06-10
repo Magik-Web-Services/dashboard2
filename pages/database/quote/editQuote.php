@@ -1,7 +1,8 @@
 <?php
 include('../dbconnect.php');
 
-if (isset($_POST['createQuote'])) {
+if (isset($_GET['editQuote'])) {
+    $id = $_GET['editQuote'];
     $user_id = $_POST['user_id'];
     $CustomerName = $_POST['CustomerName'];
     $Invoice = $_POST['Invoice'];
@@ -28,11 +29,7 @@ if (isset($_POST['createQuote'])) {
 
     $items = json_encode($item);
 
-    echo "<pre>";
-    echo $items;
-    echo "</pre>";
-
-    $sql = "INSERT INTO `dashboard2_quote` (`user_id`, `customerName`, `invoice`, `orderNumber`, `quoteDate`, `expireyDate`, `salesperson`, `subject`, `subTotal`, `Discount`, `discount2`, `Adjustment`, `TCS`, `total`, `termsAndConditions`, `items`) VALUES ('$user_id', '$CustomerName', '$Invoice', '$OrderNumber', '$QuoteDate', '$ExpireyDate', '$Salesperson', '$Subject', '$subTotal', '$Discount','$Discount2', '$Adjustment', '$TCS', '$total', '$termsAndConditions', '$items');";
+    $sql = "UPDATE `dashboard2_quote` SET `user_id`='$user_id',`customerName`='$CustomerName',`invoice`='$Invoice',`orderNumber`='$OrderNumber',`quoteDate`='$QuoteDate',`expireyDate`='[value-7]',`salesperson`='[value-8]',`subject`='[value-9]',`subTotal`='[value-10]',`Discount`='[value-11]',`discount2`='[value-12]',`Adjustment`='[value-13]',`TCS`='[value-14]',`total`='[value-15]',`termsAndConditions`='[value-16]',`items`='[value-17]',`creation_Date`='[value-18]' WHERE `quote_id`='$id'";
     $form = mysqli_query($conn, $sql);
 
     header("Location: ../../quote/quote.php");

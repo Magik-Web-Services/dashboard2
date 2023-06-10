@@ -20,8 +20,8 @@
                                 <li class="breadcrumb-item active"><a href="Allquote.php">All Quote</a></li>
                         </nav>
                     </div>
-                    <form action="../database/items/deleteitem.php" method="POST">
-                        <button type="submit" name="mDeleteitem" class="btn btn-danger">Delete</button>
+                    <form action="../database/quote/deleteQuote.php" method="POST">
+                        <button type="submit" name="mDeleteQuote" class="btn btn-danger">Delete</button>
                         <table border="1" class="mt-5 table" id="myTable">
                             <thead>
                                 <tr>

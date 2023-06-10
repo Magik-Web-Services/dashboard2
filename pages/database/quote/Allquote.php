@@ -13,10 +13,10 @@ while ($row = $result->fetch_assoc()) {
                 <td>" . $row["total"] . "</td>
                 <td>
                 <a href='#'>
-                    <i id='".$row["quote_id"]."' class='fa-solid fa-pen-to-square Customersedit' style='color: #0fff4b;'></i>
+                    <i id='".$row["quote_id"]."' class='fa-solid fa-pen-to-square quoteEdit' style='color: #0fff4b;'></i>
                 </a>
                 <a href='#'>
-                <i id='".$row["quote_id"]."'class='fa-solid fa-trash Customerdeletes' style='color: #ff0000;'></i>
+                <i id='".$row["quote_id"]."'class='fa-solid fa-trash quotedelete' style='color: #ff0000;'></i>
                 </a>
                 </td>
             </tr>

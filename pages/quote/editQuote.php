@@ -1,5 +1,18 @@
-<?php include('../common/header.php'); ?>
-<?php include('../database/dbconnect.php'); ?>
+<?php include('../common/header.php');
+include('../database/dbconnect.php');
+
+if (isset($_GET['editQuote'])) {
+    $sno = $_GET['editQuote'];
+    $sqlQuery = "SELECT * FROM `dashboard2_quote` WHERE quote_id = {$sno}";
+    $result2 = mysqli_query($conn, $sqlQuery);
+    $row2 = $result2->fetch_assoc();
+
+    $jsonitems = $row2['items'];
+    $objitems =  json_decode($jsonitems);
+    $arrayitems = get_object_vars($objitems);
+}
+
+?>
 
 <body>
     <div class="container-scroller">
@@ -14,52 +27,35 @@
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="page-header">
-                        <h3 class="page-title"> New Quote </h3>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item active"><a href="quote.php">New Quote</a></li>
-                                <li class="breadcrumb-item"><a href="Allquote.php">All Quote</a></li>
-                            </ol>
-                        </nav>
+                        <h3 class="page-title"> Edit Quote </h3>
                     </div>
                     <div class="f-row row">
-                        <form class="row" action="../database/quote/quote.php" method="post">
-                        <input type="hidden" name="user_id" id="user_id">
+                        <form class="row" action="../database/quote/editQuote.php?editQuote=<?php echo $sno; ?>" method="post">
+                            <input type="hidden" name="user_id" id="user_id">
                             <div class="col-md-7">
                                 <label for="CustomerName" class="form-label">Customer name</label>
                                 <select class="form-select form-control" name="CustomerName">
-                                    <option disabled>select customer</option>
-                                    <?php
-                                    $sql = "SELECT * FROM `dashboard2_customers`";
-                                    $result = mysqli_query($conn, $sql);
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                    ?>
-                                        <option value="<?php echo $row["firstName"];
-                                                        echo "&nbsp;";
-                                                        echo $row["lastName"]; ?>"><?php echo ucfirst($row["firstName"]);
-                                                                                    echo "&nbsp;";
-                                                                                    echo ucfirst($row["lastName"]); ?></option>
-                                    <?php } ?>
+                                    <option selected value="<?php echo $row2["customerName"] ?>"><?php echo $row2["customerName"] ?></option>
                                 </select>
                             </div>
 
                             <div class="col-md-7">
                                 <label for="Invoice" class="form-label">Invoice #</label>
-                                <input type="number" class="form-control" name="Invoice" required>
+                                <input type="number" value="<?php echo $row2["invoice"] ?>" class="form-control" name="Invoice" required>
                             </div>
                             <div class="col-md-7">
                                 <label for="OrderNumber" class="form-label">Order Number</label>
-                                <input type="number" class="form-control" name="OrderNumber" require>
+                                <input type="number" value="<?php echo $row2["orderNumber"] ?>" class="form-control" name="OrderNumber" require>
                             </div>
                             <div class="col-md-6">
                                 <label for="QuoteDate" class="form-label">Quote Date</label>
-                                <input type="date" class="form-control" name="QuoteDate" required>
+                                <input type="date" value="<?php echo $row2["quoteDate"] ?>" class="form-control" name="QuoteDate">
 
                             </div>
 
                             <div class="col-md-3">
                                 <label for="ExpireyDate" class="form-label">Expirey Date</label>
-                                <input type="date" class="form-control" name="ExpireyDate" required>
+                                <input type="date" value="<?php echo $row2["expireyDate"] ?>" class="form-control" name="ExpireyDate">
 
                             </div>
                             <div class="btm-bdr"></div>
@@ -79,7 +75,7 @@
                             <div class="btm-bdr"></div>
                             <div class="col-md-6">
                                 <label for="Subject" class="form-label">Subject</label>
-                                <input type="text" class="form-control" name="Subject" required placeholder="Let your customer know what this Invoice is for">
+                                <input type="text" class="form-control" value="<?php echo $row2["subject"] ?>" name="Subject" placeholder="Let your customer know what this Invoice is for">
                             </div>
 
                             <div class="row">
@@ -109,19 +105,26 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr class="listitems" id="itemId_1">
-                                                        <td>
-                                                            <input type="hidden" id="item_name_1" name="name[]">
-                                                            <select class="selItem" id="item_item_1" style='width: 200px;'>
-                                                                <option disabled value='0'>- Search Item -</option>
-                                                            </select>
-                                                        </td>
-                                                        <td><input onchange="calculate(this)" id="item_qty_1" class="qty" name="qty[]" type="number" value="1" name="qty"></td>
-                                                        <td><input id="item_unit_1" class="unit" readonly type="text" name="unit[]"></td>
-                                                        <td><input onchange="calculate(this)" readonly id="item_rate_1" class="rate" type="number" value="0" name="rate[]"></td>
-                                                        <td><input onchange="calculate(this)" readonly id="item_amount_1" class="amount" type="number" value="0" name="amount[]"></td>
-                                                        <td><input id="item_delete_1" type="button" value="delete" onclick="deleteRow(this)" /></td>
-                                                    </tr>
+                                                    <?php
+                                                    $x = 0;
+                                                    foreach ($arrayitems['qty'] as  $value) {
+
+                                                        echo '<tr class="listitems" id="itemId_'.($x+1).'">
+                                                            <td>
+                                                                <input type="hidden" value="'.$arrayitems["name"][$x].'" id="item_name_'.($x+1).'" name="name[]">
+                                                                <select class="selItem" id="item_item_'.($x+1).'" style="width: 200px;">
+                                                                    <option value="'.$arrayitems["name"][$x].'" selected="selected">'.$arrayitems["name"][$x].'</option>
+                                                                </select>
+                                                            </td>
+                                                            <td><input onchange="calculate(this)" id="item_qty_'.($x+1).'" class="qty" name="qty[]" type="number" value="' . $value . '" name="qty"></td>
+                                                            <td><input id="item_unit_'.($x+1).'" value="'.$arrayitems["unit"][$x].'" class="unit" readonly type="text" name="unit[]"></td>
+                                                            <td><input onchange="calculate(this)" readonly value="'.$arrayitems["rate"][$x].'" id="item_rate_'.($x+1).'" class="rate" type="number" value="0" name="rate[]"></td>
+                                                            <td><input onchange="calculate(this)" readonly value="'.$arrayitems["amount"][$x].'" id="item_amount_'.($x+1).'" class="amount" type="number"  name="amount[]"></td>
+                                                            <td><input id="item_delete_'.($x+1).'" type="button" value="delete" onclick="deleteRow(this)" /></td>
+                                                        </tr>';
+                                                        $x++;
+                                                    }
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -130,15 +133,28 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <label for="subTotal" class="form-label">Sub Total</label>
-                                        <input type="text" id="Sub_Total" name="subTotal" readonly onchange="calculate2(this)" required class="form-control" placeholder="0.00">
+                                        <input type="text" id="Sub_Total" value="<?php echo $row2["subTotal"] ?>" name="subTotal" readonly onchange="calculate2(this)" class="form-control" placeholder="0.00">
                                     </div>
                                     <div class="col-md-5">
                                         <label for="Discount" class="form-label">Discount</label>
                                         <div class="d-flex">
-                                            <input class="form-control" required id="Discount" onchange="calculate2(this)" type="number" value="0" name="Discount">
-                                            <select id="selectTax" onchange="calculate2(this)" name="Discount2" class="form-select">
-                                                <option selected value="%">%</option>
-                                                <option value="$">$</option>
+                                            <input class="form-control" value="<?php echo $row2["Discount"] ?>" id="Discount" onchange="calculate2(this)" type="number" value="0" name="Discount">
+                                            <select id="selectTax" onchange="calculate2(this)" class="form-select">
+                                                <?php
+                                                if ($row["discount2"] == "%") {
+                                                    echo '<option selected value="%">%</option>';
+                                                } else {
+                                                    echo '<option value="%">%</option>';
+                                                }
+
+                                                ?>
+                                                <?php
+                                                if ($row["discount2"] == "$") {
+                                                    echo '<option seleted value="$">$</option>';
+                                                } else {
+                                                    echo '<option value="$">$</option>';
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -147,21 +163,33 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <label for="Adjustment" class="form-label">Adjustment</label>
-                                        <input type="text" id="Adjustment" required name="Adjustment" onchange="calculate2(this)" class="form-control" placeholder="0.00">
+                                        <input type="text" id="Adjustment" value="<?php echo $row2["Adjustment"] ?>" name="Adjustment" onchange="calculate2(this)" class="form-control" placeholder="0.00">
                                     </div>
                                     <div class="col-md-5">
                                         <label for="TCS" class="form-label">TCS</label>
                                         <select name="TCS" class="form-select">
-                                            <option disabled >Select a tax</option>
-                                            <option value="gold tax">gold tax</option>
-                                            <option value="hardware tax">hardware tax</option>
+                                            <?php
+                                            if ($row["TCS"] == "gold tax") {
+                                                echo '<option selected value="gold tax">gold tax</option>';
+                                            } else {
+                                                echo '<option value="gold tax">gold tax</option>';
+                                            }
+
+                                            ?>
+                                            <?php
+                                            if ($row["TCS"] == "hardware tax") {
+                                                echo '<option selected value="hardware tax">hardware tax</option>';
+                                            } else {
+                                                echo ' <option value="hardware tax">hardware tax</option>';
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-5">
                                         <label for="total" class="form-label">Total</label>
-                                        <input type="text" id="total" required onchange="calculate2(this)" name="total" readonly class="form-control" placeholder="0.00">
+                                        <input type="text" value="<?php echo $row2["Adjustment"] ?>" id="total" onchange="calculate2(this)" name="total" readonly class="form-control" placeholder="0.00">
                                     </div>
                                 </div>
 
@@ -170,8 +198,7 @@
                                         <div class="col">
                                             <div class="form-floating">
                                                 <!-- <label for="termsAndConditions">Terms And Conditions</label> -->
-                                                <textarea class="form-control" placeholder="Terms And Conditions" name="termsAndConditions" style="height: 100px"></textarea>
-
+                                                <textarea class="form-control" placeholder="Terms And Conditions" name="termsAndConditions" style="height: 100px"><?php echo $row2["termsAndConditions"] ?></textarea>
                                             </div>
                                         </div>
                                         <!-- <div class="col upload-bg">
@@ -183,7 +210,7 @@
                                         <!-- <button type="button" class="btn btn-primary">Save as Draft</button> -->
                                         <button name="createQuote" type="submit" class="btn btn-primary">Save</button>
                                         <button type="button" class="btn btn-primary">Cancel</button>
-                                        <input name="count" type="hidden" value="1" id="item_count" />
+                                        <input name="count" type="hidden" value="<?php echo $x; ?>" id="item_count" />
                                     </div>
                                 </div>
                             </div>
@@ -250,7 +277,6 @@
                         // Calaculate
                         calculate(jQuery(ele)[0].childNodes[1].childNodes[1]);
                     },
-                    cache: true
                 })
             });;
         }
