@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 09, 2023 at 12:23 PM
+-- Generation Time: Jun 10, 2023 at 11:09 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `dashboard2_customers`;
 CREATE TABLE IF NOT EXISTS `dashboard2_customers` (
   `customerId` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
   `customerType` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
   `salutation` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
   `firstName` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
@@ -41,14 +42,15 @@ CREATE TABLE IF NOT EXISTS `dashboard2_customers` (
   `Creation_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Modified_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`customerId`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
 -- Dumping data for table `dashboard2_customers`
 --
 
-INSERT INTO `dashboard2_customers` (`customerId`, `customerType`, `salutation`, `firstName`, `lastName`, `customerPhone`, `customerEmail`, `companyName`, `Website`, `Creation_Date`, `Modified_Date`) VALUES
-(8, 'Business', 'Ms.', 'atul', 'goyal', '123', 'Atul@gmail.com', 'mws', 'ZXC', '2023-06-02 08:17:12', '2023-06-02 08:17:12');
+INSERT INTO `dashboard2_customers` (`customerId`, `user_id`, `customerType`, `salutation`, `firstName`, `lastName`, `customerPhone`, `customerEmail`, `companyName`, `Website`, `Creation_Date`, `Modified_Date`) VALUES
+(1, 1, 'Business', 'Ms.', 'Bogota', 'Bogota', '62356', 'atul22g2468@gmail.com', 'mws', 'zxc', '2023-06-10 03:51:27', '2023-06-10 07:48:32'),
+(2, 2, 'Business', 'Salutation', 'Atul', 'Goyal', '1234', 'atul22g22468@gmail.com', 'mws', 'atul', '2023-06-10 04:00:52', '2023-06-10 04:00:52');
 
 -- --------------------------------------------------------
 
@@ -67,10 +69,19 @@ CREATE TABLE IF NOT EXISTS `dashboard2_items` (
   `description` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
   `qty` int NOT NULL,
   `amount` int NOT NULL,
-  `creation_date` datetime NOT NULL,
-  `modification_date` datetime NOT NULL,
+  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modification_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`itemId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Dumping data for table `dashboard2_items`
+--
+
+INSERT INTO `dashboard2_items` (`itemId`, `user_id`, `type`, `name`, `unit`, `sellingPrice`, `description`, `qty`, `amount`, `creation_date`, `modification_date`) VALUES
+(1, 1, 'Good', 'pc', 'box', '123', 'zxc', 1, 0, '2023-06-10 05:49:15', '2023-06-10 05:49:15'),
+(2, 1, 'Good', 'pc2', 'box', '322', 'qaz', 1, 0, '2023-06-10 05:49:26', '2023-06-10 05:49:26'),
+(3, 1, 'Good', 'laptop', 'box', '432', 'asd', 1, 0, '2023-06-10 05:49:33', '2023-06-10 05:49:33');
 
 -- --------------------------------------------------------
 
@@ -81,6 +92,7 @@ CREATE TABLE IF NOT EXISTS `dashboard2_items` (
 DROP TABLE IF EXISTS `dashboard2_quote`;
 CREATE TABLE IF NOT EXISTS `dashboard2_quote` (
   `quote_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
   `customerName` varchar(255) NOT NULL,
   `invoice` varchar(255) NOT NULL,
   `orderNumber` varchar(255) NOT NULL,
@@ -90,27 +102,23 @@ CREATE TABLE IF NOT EXISTS `dashboard2_quote` (
   `subject` varchar(255) NOT NULL,
   `subTotal` varchar(255) NOT NULL,
   `Discount` varchar(255) NOT NULL,
+  `discount2` varchar(255) NOT NULL,
   `Adjustment` varchar(255) NOT NULL,
   `TCS` varchar(255) NOT NULL,
   `total` varchar(255) NOT NULL,
   `termsAndConditions` varchar(255) NOT NULL,
+  `items` json NOT NULL,
   `creation_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`quote_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `dashboard2_quote`
 --
 
-INSERT INTO `dashboard2_quote` (`quote_id`, `customerName`, `invoice`, `orderNumber`, `quoteDate`, `expireyDate`, `salesperson`, `subject`, `subTotal`, `Discount`, `Adjustment`, `TCS`, `total`, `termsAndConditions`, `creation_Date`) VALUES
-(1, 'atul goyal', '1', '', '2023-06-01', '2023-06-03', '3', 'zx', '', '23', '3431', 'Select a tax', '', 'iiuhiu', '2023-06-09 06:34:27'),
-(2, 'atul goyal', '2', '2', '2023-06-02', '2023-06-03', '1', 'Subject', '', '10', '20', '2', '', 'Terms And Conditions', '2023-06-09 06:34:27'),
-(3, 'atul goyal', '09', '09', '2023-06-01', '2023-06-02', '1', 'Subject', '122', '10', '20', 'Select a tax', '132', 'TS', '2023-06-09 06:34:27'),
-(4, 'atul goyal', '09', '12', '2023-06-03', '2023-06-01', '4', 'Subject', '1220', '10', '10', 'Select a tax', '1220', '', '2023-06-09 06:34:27'),
-(5, '', '09', '14', '2023-06-09', '2023-05-30', '2', 'Subject', '122', '0', '', 'Select a tax', '122', 'dfdf', '2023-06-09 06:34:27'),
-(6, 'atul goyal', '1414', '512352', '2023-06-09', '2023-06-28', '4', 'hio', '230580', '0080', '979', 'Select a tax', '231479', 'hgbh', '2023-06-09 06:34:27'),
-(7, 'atul goyal', '1414', '512352', '2023-06-09', '2023-06-28', '4', 'hio', '230702', '0080', '979', 'Select a tax', '230702', 'hgbh', '2023-06-09 06:34:27'),
-(8, 'atul goyal', '1414', '512352', '2023-06-09', '2023-06-28', '4', 'hio', '230702', '0080', '979', 'Select a tax', '230702', 'hgbh', '2023-06-09 06:34:27');
+INSERT INTO `dashboard2_quote` (`quote_id`, `user_id`, `customerName`, `invoice`, `orderNumber`, `quoteDate`, `expireyDate`, `salesperson`, `subject`, `subTotal`, `Discount`, `discount2`, `Adjustment`, `TCS`, `total`, `termsAndConditions`, `items`, `creation_Date`) VALUES
+(1, 1, 'Bogota Bogota', '0001', '0001', '2023-06-01', '2023-06-10', '3', 'Subject', '877', '10', '%', '10', 'gold tax', '877', 'tcs', '{\"qty\": [\"1\", \"1\", \"1\"], \"name\": [\"pc\", \"pc2\", \"laptop\"], \"rate\": [\"123\", \"322\", \"432\"], \"unit\": [\"box\", \"box\", \"box\"], \"amount\": [\"123\", \"322\", \"432\"]}', '2023-06-10 10:03:06'),
+(2, 1, 'Bogota Bogota', '0001', '0001', '2023-06-01', '2023-06-10', '', 'Subject', '246', '10', '', '10', 'gold tax', '246', 'tcs', '{\"qty\": [\"1\", \"1\"], \"name\": [\"pc\", \"pc\"], \"rate\": [\"123\", \"123\"], \"unit\": [\"box\", \"box\"], \"amount\": [\"123\", \"123\"]}', '2023-06-10 10:54:35');
 
 -- --------------------------------------------------------
 

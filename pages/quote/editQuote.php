@@ -117,9 +117,9 @@ if (isset($_GET['editQuote'])) {
                                                                 </select>
                                                             </td>
                                                             <td><input onchange="calculate(this)" id="item_qty_'.($x+1).'" class="qty" name="qty[]" type="number" value="' . $value . '" name="qty"></td>
-                                                            <td><input id="item_unit_'.($x+1).'" value="'.$arrayitems["unit"][$x].'" class="unit" readonly type="text" name="unit[]"></td>
-                                                            <td><input onchange="calculate(this)" readonly value="'.$arrayitems["rate"][$x].'" id="item_rate_'.($x+1).'" class="rate" type="number" value="0" name="rate[]"></td>
-                                                            <td><input onchange="calculate(this)" readonly value="'.$arrayitems["amount"][$x].'" id="item_amount_'.($x+1).'" class="amount" type="number"  name="amount[]"></td>
+                                                            <td><input id="item_unit_'.($x+1).'" name="'.$arrayitems["unit"][$x].'" value="'.$arrayitems["unit"][$x].'" class="unit" readonly type="text" name="unit[]"></td>
+                                                            <td><input onchange="calculate(this)" readonly name="'.$arrayitems["rate"][$x].'" value="'.$arrayitems["rate"][$x].'" id="item_rate_'.($x+1).'" class="rate" type="number" value="0" name="rate[]"></td>
+                                                            <td><input onchange="calculate(this)" readonly name="'.$arrayitems["amount"][$x].'" value="'.$arrayitems["amount"][$x].'" id="item_amount_'.($x+1).'" class="amount" type="number"  name="amount[]"></td>
                                                             <td><input id="item_delete_'.($x+1).'" type="button" value="delete" onclick="deleteRow(this)" /></td>
                                                         </tr>';
                                                         $x++;
@@ -139,7 +139,7 @@ if (isset($_GET['editQuote'])) {
                                         <label for="Discount" class="form-label">Discount</label>
                                         <div class="d-flex">
                                             <input class="form-control" value="<?php echo $row2["Discount"] ?>" id="Discount" onchange="calculate2(this)" type="number" value="0" name="Discount">
-                                            <select id="selectTax" onchange="calculate2(this)" class="form-select">
+                                            <select name="Discount2" id="selectTax" onchange="calculate2(this)" class="form-select">
                                                 <?php
                                                 if ($row["discount2"] == "%") {
                                                     echo '<option selected value="%">%</option>';

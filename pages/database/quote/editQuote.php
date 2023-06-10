@@ -29,8 +29,14 @@ if (isset($_GET['editQuote'])) {
 
     $items = json_encode($item);
 
-    $sql = "UPDATE `dashboard2_quote` SET `user_id`='$user_id',`customerName`='$CustomerName',`invoice`='$Invoice',`orderNumber`='$OrderNumber',`quoteDate`='$QuoteDate',`expireyDate`='[value-7]',`salesperson`='[value-8]',`subject`='[value-9]',`subTotal`='[value-10]',`Discount`='[value-11]',`discount2`='[value-12]',`Adjustment`='[value-13]',`TCS`='[value-14]',`total`='[value-15]',`termsAndConditions`='[value-16]',`items`='[value-17]',`creation_Date`='[value-18]' WHERE `quote_id`='$id'";
+    $sql = "UPDATE `dashboard2_quote` SET `user_id`='$user_id',`customerName`='$CustomerName',`invoice`='$Invoice',`orderNumber`='$OrderNumber',`quoteDate`='$QuoteDate',`expireyDate`='$ExpireyDate',`salesperson`='$Salesperson',`subject`='$Subject',`subTotal`='$subTotal',`Discount`='$Discount',`discount2`='$Discount2',`Adjustment`='$Adjustment',`TCS`='$TCS',`total`='$total',`termsAndConditions`='$termsAndConditions',`items`='$item' WHERE `quote_id`='$id'";
     $form = mysqli_query($conn, $sql);
 
-    header("Location: ../../quote/quote.php");
+    if ($form) {
+        echo "Update";
+    } else {
+        echo "quote Not Update";
+    }
+
+    // header("Location: ../../quote/quote.php");
 }
