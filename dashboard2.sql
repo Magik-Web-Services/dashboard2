@@ -15,7 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES latin1 */;
 
 --
 -- Database: `ebalafpv_dev`
@@ -79,9 +79,9 @@ CREATE TABLE IF NOT EXISTS `dashboard2_invoices` (
   `termsAndConditions` varchar(255) NOT NULL,
   `items` json NOT NULL,
   `creation_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `files` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `files` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
   PRIMARY KEY (`invoice_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
 -- Dumping data for table `dashboard2_invoices`
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `dashboard2_quote` (
   `creation_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `files` varchar(255) NOT NULL,
   PRIMARY KEY (`quote_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 -- --------------------------------------------------------
 

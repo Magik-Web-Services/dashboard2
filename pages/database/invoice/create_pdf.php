@@ -1,6 +1,5 @@
 <?php
 include_once("../dbconnect.php");
-include_once("../db");
 
 ob_start();
 if (isset($_GET['invoicepdf'])) {
@@ -17,39 +16,7 @@ if (isset($_GET['invoicepdf'])) {
     $customerName = $row["customerName"];
     $logo_url = $row["files"];
 
-    $GST = ($subTotal - ((($subTotal * $Discount) / 100))) - $subTotal + $Adjustment;
-
-
-    if (!empty($logo_url)) {
-        $files = glob( SITE_URL.'assets/upload/invoice/{,.}*', GLOB_BRACE);
-        foreach ($files as $file) { // iterate files
-            if (is_file($file)) {
-                unlink($file); // delete file
-            }
-        }
-        $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension   
-        $file_mine = finfo_file($finfo, $logo_url);
-        finfo_close($finfo);
-        if (isset($file_mine) && !empty($file_mine) && $file_mine == 'image/jpeg') {
-
-            $img = str_replace('data:image/jpeg;base64,', '', $logo_url);
-            $filename =  $logo_url;
-        } elseif ($file_mine == 'image/jpg') {
-            $img = str_replace('data:image/jpg;base64,', '', $logo_url);
-            $filename =  $logo_url;
-        } else {
-            $img = str_replace('data:image/png;base64,', '', $logo_url);
-            $filename =  $logo_url;
-        }
-
-        $img = str_replace(' ', '+', $img);
-        $data = base64_decode($img);
-        $file = SITE_URL."assets/upload/invoice/" . $filename;
-        $success = file_put_contents($file, $data);
-        $logo_url = '<img src="' . $file . '" height="80">';
-    } else {
-        $logo_url = '<img src="assets/images/1.png" height="80">';
-    }
+    $GST = (intval($subTotal) - (((intval($subTotal) * intval($Discount)) / 100))) - intval($subTotal) + intval($Adjustment);
 
     // Items
     $jsonitems = $row['items'];
@@ -124,7 +91,6 @@ if (isset($_GET['invoicepdf'])) {
                         <td><strong style="font-size: 18px; text-align: left;">Tax Invoice</strong><br>
                             <small style="font-size: 16px; text-align: left;">INV-' . $invoice_number . '</small>
                         </td>
-                        '.$logo_url.'
                     </tr>
                 </tbody>
             </table></td>
