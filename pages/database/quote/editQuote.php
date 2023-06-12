@@ -1,5 +1,10 @@
 <?php
 include('../dbconnect.php');
+include('../../common/config.php');
+
+// echo "<pre>";
+// print_r($_GET);
+// echo "</pre>";
 
 if (isset($_GET['editQuote'])) {
     $id = $_GET['editQuote'];
@@ -29,7 +34,14 @@ if (isset($_GET['editQuote'])) {
 
     $items = json_encode($item);
 
-    $sql = "UPDATE `dashboard2_quote` SET `user_id`='$user_id',`customerName`='$CustomerName',`invoice`='$Invoice',`orderNumber`='$OrderNumber',`quoteDate`='$QuoteDate',`expireyDate`='$ExpireyDate',`salesperson`='$Salesperson',`subject`='$Subject',`subTotal`='$subTotal',`Discount`='$Discount',`discount2`='$Discount2',`Adjustment`='$Adjustment',`TCS`='$TCS',`total`='$total',`termsAndConditions`='$termsAndConditions',`items`='$item' WHERE `quote_id`='$id'";
+    $fileName = $_FILES['file']["name"];
+    $tmpName = $_FILES['file']["tmp_name"];
+
+    $folder =  SITE_URL.'assets/upload/quote/'.$fileName;
+    // move_uploaded_file($tmpName, $folder);
+
+    $sql = "UPDATE `dashboard2_quote` SET `user_id`='$user_id',`customerName`='$CustomerName',`invoice`='$Invoice',`orderNumber`='$OrderNumber',`quoteDate`='$QuoteDate',`expireyDate`='$ExpireyDate',`subject`='$Subject',`subTotal`='$subTotal',`Discount`='$Discount',`discount2`='$Discount2',`Adjustment`='$Adjustment',`TCS`='$TCS',`total`='$total', `salesperson`='$Salesperson',`files`='$fileName', `termsAndConditions`='$termsAndConditions',`items`='$items' WHERE `quote_id`='$id'";
+
     $form = mysqli_query($conn, $sql);
 
     if ($form) {
@@ -38,5 +50,5 @@ if (isset($_GET['editQuote'])) {
         echo "quote Not Update";
     }
 
-    // header("Location: ../../quote/quote.php");
+    header("Location: ../../quote/Allquote.php");
 }

@@ -23,8 +23,8 @@
                         </nav>
                     </div>
                     <div class="f-row row">
-                        <form class="row" action="../database/quote/quote.php" method="post">
-                        <input type="hidden" name="user_id" id="user_id">
+                        <form class="row" action="../database/quote/quote.php" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="user_id" id="user_id">
                             <div class="col-md-7">
                                 <label for="CustomerName" class="form-label">Customer name</label>
                                 <select class="form-select form-control" name="CustomerName">
@@ -44,7 +44,7 @@
                             </div>
 
                             <div class="col-md-7">
-                                <label for="Invoice" class="form-label">Invoice #</label>
+                                <label for="Invoice" class="form-label">Quote #</label>
                                 <input type="number" class="form-control" name="Invoice" required>
                             </div>
                             <div class="col-md-7">
@@ -152,7 +152,7 @@
                                     <div class="col-md-5">
                                         <label for="TCS" class="form-label">TCS</label>
                                         <select name="TCS" class="form-select">
-                                            <option disabled >Select a tax</option>
+                                            <option disabled>Select a tax</option>
                                             <option value="gold tax">gold tax</option>
                                             <option value="hardware tax">hardware tax</option>
                                         </select>
@@ -170,14 +170,14 @@
                                         <div class="col">
                                             <div class="form-floating">
                                                 <!-- <label for="termsAndConditions">Terms And Conditions</label> -->
-                                                <textarea class="form-control" placeholder="Terms And Conditions" name="termsAndConditions" style="height: 100px"></textarea>
+                                                <textarea class="form-control" name="termsAndConditions" style="height: 100px">Terms And Conditions</textarea>
 
                                             </div>
                                         </div>
-                                        <!-- <div class="col upload-bg">
-                                            <input type="file" id="myFile">
-                                            <p>Attach File(s) to Quote</p>
-                                        </div> -->
+                                        <div class="col upload-bg">
+                                            <input type="file" name="file" id="myFile">
+                                            <p>only 1 file upload</p>
+                                        </div>
                                     </div>
                                     <div class="pd">
                                         <!-- <button type="button" class="btn btn-primary">Save as Draft</button> -->

@@ -2,7 +2,6 @@
 include_once("../dbconnect.php");
 // deleteQuote
 if (isset($_GET['deleteQuote'])) {
-    echo "deleteQuote";
     $sno = $_GET['deleteQuote'];
     $deleteSql = "DELETE FROM `dashboard2_quote` WHERE `quote_id` = $sno";
     $deleteServer = mysqli_query($conn, $deleteSql);

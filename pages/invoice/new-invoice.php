@@ -23,10 +23,11 @@
                         </nav> -->
                     </div>
                     <div class="f-row row">
-                        <form class="row ">
+                        <form class="row" method="POST" action="../database/invoice/invoice.php" enctype="multipart/form-data">
+                            <input type="hidden" name="user_id" id="user_id">
                             <div class="col-md-7">
-                                <label for="validationDefault01" class="form-label">Customer name</label>
-                                <select class="form-select form-control" aria-label="Default select example">
+                                <label for="CustomerName" class="form-label">Customer name</label>
+                                <select class="form-select form-control" name="CustomerName">
                                     <option selected>select customer</option>
                                     <?php
                                     $sql = "SELECT * FROM `dashboard2_customers`";
@@ -43,39 +44,39 @@
                             </div>
 
                             <div class="col-md-7">
-                                <label for="validationDefault03" class="form-label">Invoice #</label>
-                                <input type="tel" class="form-control" id="validationDefault03" required>
+                                <label for="Invoice" class="form-label">Invoice #</label>
+                                <input type="tel" class="form-control" name="Invoice" required>
                             </div>
                             <div class="col-md-7">
-                                <label for="validationDefault03" class="form-label">Order Number</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1">
+                                <label for="OrderNumber" class="form-label">Order Number</label>
+                                <input type="text" class="form-control" name="OrderNumber">
                             </div>
                             <div class="col-md-6">
-                                <label for="inputCity" class="form-label">Invoice Date</label>
-                                <input type="date" class="form-control" id="inputCity">
+                                <label for="InvoiceDate" class="form-label">Invoice Date</label>
+                                <input type="date" class="form-control" name="InvoiceDate">
 
                             </div>
                             <div class="col-md-3">
-                                <label for="inputCity" class="form-label">Terms</label>
-                                <select class="form-select form-control" aria-label="Default select example">
+                                <label for="Terms" class="form-label">Terms</label>
+                                <select class="form-select form-control" name="Terms">
                                     <option selected>Due on Receipt</option>
-                                    <option value="1">NET 15</option>
-                                    <option value="2">NET 30</option>
-                                    <option value="3">NET 45</option>
-                                    <option value="3">NET 60</option>
+                                    <option value="NET 15">NET 15</option>
+                                    <option value="NET 30">NET 30</option>
+                                    <option value="NET 45">NET 45</option>
+                                    <option value="NET 60">NET 60</option>
 
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <label for="inputCity" class="form-label">Due Date</label>
-                                <input type="date" class="form-control" id="inputCity">
+                                <label for="ExpireyDate" class="form-label">Due Date</label>
+                                <input type="date" class="form-control" name="ExpireyDate">
 
                             </div>
                             <div class="btm-bdr"></div>
 
                             <div class="col-md-7">
-                                <label for="validationDefault01" class="form-label">Salesperson</label>
-                                <select class="form-select form-control" aria-label="Default select example">
+                                <label for="Salesperson" class="form-label">Salesperson</label>
+                                <select class="form-select form-control" name="Salesperson">
                                     <option selected>Select or Add Salesperson</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -87,67 +88,66 @@
                             </div>
                             <div class="btm-bdr"></div>
                             <div class="col-md-6">
-                                <label for="validationDefault03" class="form-label">Subject</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Let your customer know what this Invoice is for">
+                                <label for="Subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" name="Subject" placeholder="Let your customer know what this Invoice is for">
                             </div>
-                        </form>
 
-                        <div class="row">
-                            <div class="col-lg-12 grid-margin stretch-card">
+                            <div class="row">
+                                <div class="col-lg-12 grid-margin stretch-card">
 
-                                <div class="card">
-                                    <div id="container">
-                                        <button type="button" class="btn btn-primary" id="Addline">Add New Row </button>
-                                        <button type="button" class="btn btn-primary" onclick="deleteRow()">Delete Row </button>
-                                        <br>
-                                        <br>
-                                        <table id="employee-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>ITEM DETAILS
-                                                    </th>
-                                                    <th>QUANTITY
-                                                    </th>
-                                                    <th>Unit
-                                                    </th>
-                                                    <th>RATE
-                                                    </th>
-                                                    <th>AMOUNT
-                                                    </th>
-                                                    <th>Action
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="listitems" id="itemId_1">
-                                                    <td>
-                                                        <select class="selItem" id="item_item_1" style='width: 200px;'>
-                                                            <option value='0'>- Search Item -</option>
-                                                        </select>
-                                                    </td>
-                                                    <td><input onchange="calculate(this)" id="item_qty_1" class="qty" type="number" value="1" name="qty"></td>
-                                                    <td><input id="item_unit_1" class="unit" type="text" name="unit"></td>
-                                                    <td><input onchange="calculate(this)" id="item_rate_1" class="rate" type="number" value="0" name="rate"></td>
-                                                    <td><input onchange="calculate(this)" id="item_amount_1" class="amount" type="number" value="0" name="amount"></td>
-                                                    <td><input id="item_delete_1" readonly type="button" value="delete" onclick="deleteRow(this)" /></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="card">
+                                        <div id="container">
+                                            <button type="button" class="btn btn-primary" id="Addline">Add New Row </button>
+                                            <button type="button" class="btn btn-primary" onclick="deleteRow()">Delete Row </button>
+                                            <br>
+                                            <br>
+                                            <table id="employee-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ITEM DETAILS
+                                                        </th>
+                                                        <th>QUANTITY
+                                                        </th>
+                                                        <th>Unit
+                                                        </th>
+                                                        <th>RATE
+                                                        </th>
+                                                        <th>AMOUNT
+                                                        </th>
+                                                        <th>Action
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="listitems" id="itemId_1">
+                                                        <td>
+                                                            <input type="hidden" id="item_name_1" name="name[]">
+                                                            <select class="selItem" id="item_item_1" style='width: 200px;'>
+                                                                <option disabled value='0'>- Search Item -</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><input onchange="calculate(this)" id="item_qty_1" class="qty" name="qty[]" type="number" value="1" name="qty"></td>
+                                                        <td><input id="item_unit_1" class="unit" readonly type="text" name="unit[]"></td>
+                                                        <td><input onchange="calculate(this)" readonly id="item_rate_1" class="rate" type="number" value="0" name="rate[]"></td>
+                                                        <td><input onchange="calculate(this)" readonly id="item_amount_1" class="amount" type="number" value="0" name="amount[]"></td>
+                                                        <td><input id="item_delete_1" type="button" value="delete" onclick="deleteRow(this)" /></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <form class="row g-3">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label for="validationDefault01" class="form-label">Sub Total</label>
-                                    <input type="text" id="Sub_Total" readonly onchange="calculate2(this)" class="form-control" placeholder="0.00">
+                                    <label for="subTotal" class="form-label">Sub Total</label>
+                                    <input type="text" id="Sub_Total" name="subTotal" readonly onchange="calculate2(this)" class="form-control" placeholder="0.00">
                                 </div>
                                 <div class="col-md-5">
                                     <label for="Discount" class="form-label">Discount</label>
                                     <div class="d-flex">
                                         <input class="form-control" onchange="calculate2(this)" id="Discount" type="number" value="0" name="Discount">
-                                        <select id="selectTax" onchange="calculate2(this)" class="form-select">
+                                        <select name="Discount2" onchange="calculate2(this)" class="form-select">
                                             <option selected value="%">%</option>
                                             <option value="$">$</option>
                                         </select>
@@ -158,47 +158,46 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <label for="Adjustment" class="form-label">Adjustment</label>
-                                    <input type="text" id="Adjustment" onchange="calculate2(this)" class="form-control" placeholder="0.00">
+                                    <input type="text" name="Adjustment" onchange="calculate2(this)" class="form-control" placeholder="0.00">
                                 </div>
                                 <div class="col-md-5">
-                                    <label for="inputState" class="form-label">TCS</label>
-                                    <select id="inputState" class="form-select">
-                                        <option selected>Select a tax</option>
-                                        <option value="1">gold tax</option>
-                                        <option value="2">hardware tax</option>
+                                    <label for="TCS" class="form-label">TCS</label>
+                                    <select name="TCS" class="form-select">
+                                        <option disabled>Select a tax</option>
+                                        <option value="gold tax">gold tax</option>
+                                        <option value="hardware tax">hardware tax</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label for="validationDefault01" class="form-label">Total</label>
-                                    <input type="text" onchange="calculate2(this)" id="total" readonly class="form-control" placeholder="0.00">
+                                    <label for="total" class="form-label">Total</label>
+                                    <input type="text" id="total" onchange="calculate2(this)" name="total" readonly class="form-control" placeholder="0.00">
+                                </div>
+                            </div>
+
+                            <div class="file-up">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <!-- <label for="termsAndConditions">Terms And Conditions</label> -->
+                                            <textarea class="form-control" name="termsAndConditions" style="height: 100px"></textarea>
+
+                                        </div>
+                                    </div>
+                                    <div class="col upload-bg">
+                                        <input type="file" name="file" id="myFile">
+                                        <p>Attach File(s) to Quote</p>
+                                    </div>
+                                </div>
+                                <div class="pd">
+                                    <!-- <button type="button" class="btn btn-primary">Save as Draft</button> -->
+                                    <button type="submit" name="createInvoice" class="btn btn-primary">Save and Send</button>
+                                    <button type="button" class="btn btn-primary">Cancel</button>
+                                    <input type="hidden" value="1" id="item_count" />
                                 </div>
                             </div>
                         </form>
-
-                        <div class="file-up">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <label for="floatingTextarea2">Terms And Conditions</label>
-                                        <textarea class="form-control" placeholder="Terms And Conditions" id="floatingTextarea2" style="height: 100px"></textarea>
-
-                                    </div>
-                                </div>
-                                <div class="col upload-bg">
-                                    <input type="file" id="myFile">
-                                    <p>Attach File(s) to Quote</p>
-
-                                </div>
-                            </div>
-                            <div class="pd">
-                                <button type="button" class="btn btn-primary">Save as Draft</button>
-                                <button type="button" class="btn btn-primary">Save and Send</button>
-                                <button type="button" class="btn btn-primary">Cancel</button>
-                                <input type="hidden" value="1" id="item_count" />
-                            </div>
-                        </div>
                     </div>
                     <footer class="footer">
                         <div class="footer-inner-wraper">
@@ -249,13 +248,16 @@
                             dataId: dataId
                         },
                         success: function(response) {
+                            // Name
+                            jQuery("#" + jQuery(ele)[0].childNodes[1].childNodes[1].id).val(response[0].name)
                             // Unit
                             jQuery("#" + jQuery(ele)[0].childNodes[5].childNodes[0].id).val(response[0].unit)
                             // Rate
                             jQuery("#" + jQuery(ele)[0].childNodes[7].childNodes[0].id).val(response[0].sellingPrice)
+                            // Amount
+                            jQuery("#" + jQuery(ele)[0].childNodes[9].childNodes[0].id).val(response[0].sellingPrice)
                             // Calaculate
                             calculate(jQuery(ele)[0].childNodes[1].childNodes[1]);
-                            // console.log(jQuery(ele)[0].childNodes[1].childNodes[1].id);
                         },
                         cache: true
                     })

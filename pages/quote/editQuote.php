@@ -11,7 +11,6 @@ if (isset($_GET['editQuote'])) {
     $objitems =  json_decode($jsonitems);
     $arrayitems = get_object_vars($objitems);
 }
-
 ?>
 
 <body>
@@ -30,7 +29,7 @@ if (isset($_GET['editQuote'])) {
                         <h3 class="page-title"> Edit Quote </h3>
                     </div>
                     <div class="f-row row">
-                        <form class="row" action="../database/quote/editQuote.php?editQuote=<?php echo $sno; ?>" method="post">
+                        <form class="row" action="../database/quote/editQuote.php?editQuote=<?php echo $sno; ?>" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="user_id" id="user_id">
                             <div class="col-md-7">
                                 <label for="CustomerName" class="form-label">Customer name</label>
@@ -40,7 +39,7 @@ if (isset($_GET['editQuote'])) {
                             </div>
 
                             <div class="col-md-7">
-                                <label for="Invoice" class="form-label">Invoice #</label>
+                                <label for="Invoice" class="form-label">Quote #</label>
                                 <input type="number" value="<?php echo $row2["invoice"] ?>" class="form-control" name="Invoice" required>
                             </div>
                             <div class="col-md-7">
@@ -63,13 +62,41 @@ if (isset($_GET['editQuote'])) {
                             <div class="col-md-7">
                                 <label for="Salesperson" class="form-label">Salesperson</label>
                                 <select class="form-select form-control" name="Salesperson">
-                                    <option disabled selected>Select or Add Salesperson</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-
+                                    <?php
+                                    if ($row2["salesperson"] == "1") {
+                                        echo '<option selected value="1">1</option>';
+                                    } else {
+                                        echo '<option value="1">1</option>';
+                                    }
+                                    ?>
+                                    <?php
+                                    if ($row2["salesperson"] == "2") {
+                                        echo '<option selected value="2">2</option>';
+                                    } else {
+                                        echo '<option value="2">2</option>';
+                                    }
+                                    ?>
+                                    <?php
+                                    if ($row2["salesperson"] == "3") {
+                                        echo '<option selected value="3">3</option>';
+                                    } else {
+                                        echo '<option value="3">3</option>';
+                                    }
+                                    ?>
+                                    <?php
+                                    if ($row2["salesperson"] == "4") {
+                                        echo '<option selected value="4">4</option>';
+                                    } else {
+                                        echo '<option value="4">4</option>';
+                                    }
+                                    ?>
+                                    <?php
+                                    if ($row2["salesperson"] == "5") {
+                                        echo '<option selected value="5">5</option>';
+                                    } else {
+                                        echo '<option value="5">5</option>';
+                                    }
+                                    ?>
                                 </select>
                             </div>
                             <div class="btm-bdr"></div>
@@ -109,18 +136,18 @@ if (isset($_GET['editQuote'])) {
                                                     $x = 0;
                                                     foreach ($arrayitems['qty'] as  $value) {
 
-                                                        echo '<tr class="listitems" id="itemId_'.($x+1).'">
+                                                        echo '<tr class="listitems" id="itemId_' . ($x + 1) . '">
                                                             <td>
-                                                                <input type="hidden" value="'.$arrayitems["name"][$x].'" id="item_name_'.($x+1).'" name="name[]">
-                                                                <select class="selItem" id="item_item_'.($x+1).'" style="width: 200px;">
-                                                                    <option value="'.$arrayitems["name"][$x].'" selected="selected">'.$arrayitems["name"][$x].'</option>
+                                                                <input type="hidden" value="' . $arrayitems["name"][$x] . '" id="item_name_' . ($x + 1) . '" name="name[]">
+                                                                <select class="selItem" id="item_item_' . ($x + 1) . '" style="width: 200px;">
+                                                                    <option value="' . $arrayitems["name"][$x] . '" selected="selected">' . $arrayitems["name"][$x] . '</option>
                                                                 </select>
                                                             </td>
-                                                            <td><input onchange="calculate(this)" id="item_qty_'.($x+1).'" class="qty" name="qty[]" type="number" value="' . $value . '" name="qty"></td>
-                                                            <td><input id="item_unit_'.($x+1).'" name="'.$arrayitems["unit"][$x].'" value="'.$arrayitems["unit"][$x].'" class="unit" readonly type="text" name="unit[]"></td>
-                                                            <td><input onchange="calculate(this)" readonly name="'.$arrayitems["rate"][$x].'" value="'.$arrayitems["rate"][$x].'" id="item_rate_'.($x+1).'" class="rate" type="number" value="0" name="rate[]"></td>
-                                                            <td><input onchange="calculate(this)" readonly name="'.$arrayitems["amount"][$x].'" value="'.$arrayitems["amount"][$x].'" id="item_amount_'.($x+1).'" class="amount" type="number"  name="amount[]"></td>
-                                                            <td><input id="item_delete_'.($x+1).'" type="button" value="delete" onclick="deleteRow(this)" /></td>
+                                                            <td><input onchange="calculate(this)" id="item_qty_' . ($x + 1) . '" class="qty" name="qty[]" type="number" value="' . $value . '" name="qty"></td>
+                                                            <td><input id="item_unit_' . ($x + 1) . '" value="' . $arrayitems["unit"][$x] . '" class="unit" readonly type="text" name="unit[]"></td>
+                                                            <td><input onchange="calculate(this)" readonly name="rate[]" value="' . $arrayitems["rate"][$x] . '" id="item_rate_' . ($x + 1) . '" class="rate" type="number" value="0" name="rate[]"></td>
+                                                            <td><input onchange="calculate(this)" readonly name="amount[]" value="' . $arrayitems["amount"][$x] . '" id="item_amount_' . ($x + 1) . '" class="amount" type="number"  name="amount[]"></td>
+                                                            <td><input id="item_delete_' . ($x + 1) . '" type="button" value="delete" onclick="deleteRow(this)" /></td>
                                                         </tr>';
                                                         $x++;
                                                     }
@@ -141,16 +168,15 @@ if (isset($_GET['editQuote'])) {
                                             <input class="form-control" value="<?php echo $row2["Discount"] ?>" id="Discount" onchange="calculate2(this)" type="number" value="0" name="Discount">
                                             <select name="Discount2" id="selectTax" onchange="calculate2(this)" class="form-select">
                                                 <?php
-                                                if ($row["discount2"] == "%") {
+                                                if ($row2["discount2"] == "%") {
                                                     echo '<option selected value="%">%</option>';
                                                 } else {
                                                     echo '<option value="%">%</option>';
                                                 }
-
                                                 ?>
                                                 <?php
-                                                if ($row["discount2"] == "$") {
-                                                    echo '<option seleted value="$">$</option>';
+                                                if ($row2["discount2"] == "$") {
+                                                    echo '<option selected value="$">$</option>';
                                                 } else {
                                                     echo '<option value="$">$</option>';
                                                 }
@@ -169,7 +195,7 @@ if (isset($_GET['editQuote'])) {
                                         <label for="TCS" class="form-label">TCS</label>
                                         <select name="TCS" class="form-select">
                                             <?php
-                                            if ($row["TCS"] == "gold tax") {
+                                            if ($row2["TCS"] == "gold tax") {
                                                 echo '<option selected value="gold tax">gold tax</option>';
                                             } else {
                                                 echo '<option value="gold tax">gold tax</option>';
@@ -177,7 +203,7 @@ if (isset($_GET['editQuote'])) {
 
                                             ?>
                                             <?php
-                                            if ($row["TCS"] == "hardware tax") {
+                                            if ($row2["TCS"] == "hardware tax") {
                                                 echo '<option selected value="hardware tax">hardware tax</option>';
                                             } else {
                                                 echo ' <option value="hardware tax">hardware tax</option>';
@@ -201,10 +227,10 @@ if (isset($_GET['editQuote'])) {
                                                 <textarea class="form-control" placeholder="Terms And Conditions" name="termsAndConditions" style="height: 100px"><?php echo $row2["termsAndConditions"] ?></textarea>
                                             </div>
                                         </div>
-                                        <!-- <div class="col upload-bg">
-                                            <input type="file" id="myFile">
-                                            <p>Attach File(s) to Quote</p>
-                                        </div> -->
+                                        <div class="col upload-bg">
+                                            <input type="file" name="file" id="myFile">
+                                            <p>only 1 file upload</p>
+                                        </div>
                                     </div>
                                     <div class="pd">
                                         <!-- <button type="button" class="btn btn-primary">Save as Draft</button> -->

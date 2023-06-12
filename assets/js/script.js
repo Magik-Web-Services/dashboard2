@@ -98,12 +98,44 @@ $(document).ready(function () {
         })
     })
 
-        // quoteedit
-        let quoteedit = jQuery('.quoteEdit');
-        Array.from(quoteedit).forEach(element => {
+    // quoteedit
+    let quoteedit = jQuery('.quoteEdit');
+    Array.from(quoteedit).forEach(element => {
+        element.addEventListener("click", (e) => {
+            sno = e.target.id
+            window.location = `../../pages/quote/editQuote.php?editQuote=${sno}`;
+        })
+    })
+
+        // inoice
+
+    // invoicedelete
+    let invoicedelete = jQuery('.invoicedelete');
+    Array.from(invoicedelete).forEach(element => {
+        element.addEventListener("click", (e) => {
+            sno = e.target.id
+            if (confirm("Are you sure you want to delete this invoice!")) {
+                window.location = `../../pages/database/invoice/invoiceDelete.php?invoiceDelete=${sno}`;
+            }
+        })
+    })
+
+        // invoiceEdit
+        let invoiceEdit = jQuery('.invoiceEdit');
+        Array.from(invoiceEdit).forEach(element => {
             element.addEventListener("click", (e) => {
                 sno = e.target.id
-                window.location = `../../pages/quote/editQuote.php?editQuote=${sno}`;
+                window.location = `../../pages/invoice/editinvoice.php?invoiceEdit=${sno}`;
+            })
+        })
+        // invoicepdf
+        let invoicepdf = jQuery('.invoicepdf');
+        Array.from(invoicepdf).forEach(element => {
+            element.addEventListener("click", (e) => {
+                sno = e.target.id
+                if (confirm("Are you sure create a PDF file")) {
+                    window.location = `../../pages/database/invoice/create_pdf.php?invoicepdf=${sno}`;
+                }
             })
         })
 

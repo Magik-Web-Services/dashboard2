@@ -1,5 +1,10 @@
 <?php
 include('../dbconnect.php');
+include('../../common/config.php');
+
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
 
 if (isset($_POST['createQuote'])) {
     $user_id = $_POST['user_id'];
@@ -28,11 +33,18 @@ if (isset($_POST['createQuote'])) {
 
     $items = json_encode($item);
 
-    echo "<pre>";
-    echo $items;
-    echo "</pre>";
+    // echo "<pre>";
+    // echo $items;
+    // echo "</pre>";
 
-    $sql = "INSERT INTO `dashboard2_quote` (`user_id`, `customerName`, `invoice`, `orderNumber`, `quoteDate`, `expireyDate`, `salesperson`, `subject`, `subTotal`, `Discount`, `discount2`, `Adjustment`, `TCS`, `total`, `termsAndConditions`, `items`) VALUES ('$user_id', '$CustomerName', '$Invoice', '$OrderNumber', '$QuoteDate', '$ExpireyDate', '$Salesperson', '$Subject', '$subTotal', '$Discount','$Discount2', '$Adjustment', '$TCS', '$total', '$termsAndConditions', '$items');";
+    $fileName = $_FILES['file']["name"];
+    $tmpName = $_FILES['file']["tmp_name"];
+
+    $folder =  SITE_URL.'assets/upload/quote/'.$fileName;
+    // move_uploaded_file($tmpName, $folder);
+
+
+    $sql = "INSERT INTO `dashboard2_quote` (`user_id`, `customerName`, `invoice`, `orderNumber`, `quoteDate`, `expireyDate`, `salesperson`, `subject`, `subTotal`, `Discount`, `discount2`, `Adjustment`, `TCS`, `total`, `termsAndConditions`, `items`, `files`) VALUES ('$user_id', '$CustomerName', '$Invoice', '$OrderNumber', '$QuoteDate', '$ExpireyDate', '$Salesperson', '$Subject', '$subTotal', '$Discount','$Discount2', '$Adjustment', '$TCS', '$total', '$termsAndConditions', '$items', '$fileName');";
     $form = mysqli_query($conn, $sql);
 
     header("Location: ../../quote/quote.php");
