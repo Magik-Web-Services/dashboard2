@@ -175,7 +175,7 @@
                                             </div>
                                         </div>
                                         <div class="col upload-bg">
-                                            <input type="file" name="file" id="myFile">
+                                            <input type="file" name="file[]" id="myFile">
                                             <p>only 1 file upload</p>
                                         </div>
                                     </div>

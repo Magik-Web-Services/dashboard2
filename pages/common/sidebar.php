@@ -7,12 +7,18 @@
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="<?php echo SITE_URL; ?>pages/users/user.php">
-        <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
-        <span class="menu-title">New User</span>
-      </a>
-    </li>
+    <?php
+    if ($_SESSION['username']  == "admin") {
+      $site = SITE_URL;
+      echo '   
+      <li class="nav-item">
+        <a class="nav-link" href="' . $site.'pages/users/user.php">
+          <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
+          <span class="menu-title">New User</span>
+        </a>
+      </li>';
+    }
+    ?>
     <li class="nav-item">
       <a class="nav-link" href="<?php echo SITE_URL; ?>pages/customer/customer.php">
         <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
@@ -43,7 +49,7 @@
           <li class="nav-item"> <a class="nav-link" href="<?php echo SITE_URL; ?>pages/invoice/all-invoice.php">All Invoices</a></li>
           <li class="nav-item"> <a class="nav-link" href="<?php echo SITE_URL; ?>pages/invoice/add-invoice.php">Add Invoice</a></li>
           <li class="nav-item"> <a class="nav-link" href="<?php echo SITE_URL; ?>pages/invoice/new-invoice.php">Add New Invoice</a></li>
-          
+
 
 
         </ul>

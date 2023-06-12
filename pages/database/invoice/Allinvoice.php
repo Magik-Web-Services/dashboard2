@@ -1,6 +1,9 @@
 <?php
 include(dirname(__FILE__) . "/../dbconnect.php");
-$sql2 = "select * from dashboard2_invoices";
+
+$id = $_SESSION['userID'];
+
+$sql2 = "select * from dashboard2_invoices WHERE `user_id`='$id'";
 $result = mysqli_query($conn, $sql2);
 
 while ($row = $result->fetch_assoc()) {

@@ -261,8 +261,8 @@ if (isset($_GET['invoiceEdit'])) {
                                         </div>
                                     </div>
                                     <div class="col upload-bg">
-                                        <input type="file" name="file" id="myFile">
-                                        <p>Attach File(s) to Quote</p>
+                                    <input type="file" name="file[]" id="myFile"  accept="image/png, image/jpeg">
+                                        <p>Upload Your Logo</p>
                                     </div>
                                 </div>
                                 <div class="pd">

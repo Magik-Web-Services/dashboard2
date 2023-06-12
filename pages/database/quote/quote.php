@@ -33,15 +33,11 @@ if (isset($_POST['createQuote'])) {
 
     $items = json_encode($item);
 
-    // echo "<pre>";
-    // echo $items;
-    // echo "</pre>";
+    $fileName = $_FILES['file']["name"][0];
+    $tmpName = $_FILES['file']["tmp_name"][0];
 
-    $fileName = $_FILES['file']["name"];
-    $tmpName = $_FILES['file']["tmp_name"];
-
-    $folder =  SITE_URL.'assets/upload/quote/'.$fileName;
-    // move_uploaded_file($tmpName, $folder);
+    $folder =    "../../../assets/upload/quote/". $fileName;
+    $res = move_uploaded_file($tmpName, $folder);
 
 
     $sql = "INSERT INTO `dashboard2_quote` (`user_id`, `customerName`, `invoice`, `orderNumber`, `quoteDate`, `expireyDate`, `salesperson`, `subject`, `subTotal`, `Discount`, `discount2`, `Adjustment`, `TCS`, `total`, `termsAndConditions`, `items`, `files`) VALUES ('$user_id', '$CustomerName', '$Invoice', '$OrderNumber', '$QuoteDate', '$ExpireyDate', '$Salesperson', '$Subject', '$subTotal', '$Discount','$Discount2', '$Adjustment', '$TCS', '$total', '$termsAndConditions', '$items', '$fileName');";

@@ -15,11 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $row['password'])) {
                 echo '<script>alert("Login!")</script>';
                 $sno = $row["sno"];
+                $role = $row["role"];
                 $login = true;
                 session_start();
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $userName;
                 $_SESSION['userID'] = $sno;
+                $_SESSION['userRole'] = $role;
                 header("location: pages/dashboard.php");
             } else {
                 echo '<script>alert("Invalid Credentials!")</script>';

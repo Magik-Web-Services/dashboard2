@@ -1,5 +1,7 @@
 <?php include('../common/header.php'); ?>
-<?php include('../database/dbconnect.php'); ?>
+<?php include('../database/dbconnect.php');
+
+?>
 
 <body>
     <div class="container-scroller">
@@ -147,7 +149,7 @@
                                     <label for="Discount" class="form-label">Discount</label>
                                     <div class="d-flex">
                                         <input class="form-control" onchange="calculate2(this)" id="Discount" type="number" value="0" name="Discount">
-                                        <select name="Discount2" onchange="calculate2(this)" class="form-select">
+                                        <select id="selectTax" name="Discount2" onchange="calculate2(this)" class="form-select">
                                             <option selected value="%">%</option>
                                             <option value="$">$</option>
                                         </select>
@@ -158,7 +160,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <label for="Adjustment" class="form-label">Adjustment</label>
-                                    <input type="text" name="Adjustment" onchange="calculate2(this)" class="form-control" placeholder="0.00">
+                                    <input type="text" id="Adjustment" name="Adjustment" onchange="calculate2(this)" class="form-control" placeholder="0.00">
                                 </div>
                                 <div class="col-md-5">
                                     <label for="TCS" class="form-label">TCS</label>
@@ -186,8 +188,8 @@
                                         </div>
                                     </div>
                                     <div class="col upload-bg">
-                                        <input type="file" name="file" id="myFile">
-                                        <p>Attach File(s) to Quote</p>
+                                        <input type="file" name="file[]" id="myFile"  accept="image/png, image/jpeg">
+                                        <p>Upload Your Logo</p>
                                     </div>
                                 </div>
                                 <div class="pd">

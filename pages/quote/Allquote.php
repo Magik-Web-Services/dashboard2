@@ -28,7 +28,7 @@
                                     <th>#</th>
                                     <!-- <th style="display: none;"></th> -->
                                     <th>Date</th>
-                                    <th>Order Number</th>
+                                    <th>Quote #</th>
                                     <th>Customer name</th>
                                     <th>Total</th>
                                     <th>Actions</th>

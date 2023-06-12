@@ -34,26 +34,18 @@ if (isset($_POST['createInvoice'])) {
 
     $items = json_encode($item);
 
-    // echo "<pre>";
-    // echo $items;
-    // echo "</pre>";
+    $fileName = $_FILES['file']["name"][0];
+    $tmpName = $_FILES['file']["tmp_name"][0];
 
-    $fileName = $_FILES['file']["name"];
-    $tmpName = $_FILES['file']["tmp_name"];
+    $folder =    "../../../assets/upload/invoice/". $fileName;
+    $res = move_uploaded_file($tmpName, $folder);
 
-    $folder =  SITE_URL . 'assets/upload/invoice/' . $fileName;
-    // move_uploaded_file($tmpName, $folder);
+    // echo $tmpName;
 
 
     $sql = "INSERT INTO `dashboard2_invoices`(`user_id`, `customerName`, `invoice`, `orderNumber`, `InvoiceDate`, `Terms`, `expireyDate`, `salesperson`, `subject`, `subTotal`, `Discount`, `discount2`, `Adjustment`, `TCS`, `total`, `termsAndConditions`, `items`, `files`) VALUES ('$user_id', '$CustomerName', '$Invoice', '$OrderNumber', '$InvoiceDate', '$Terms' ,'$ExpireyDate', '$Salesperson', '$Subject', '$subTotal', '$Discount','$Discount2', '$Adjustment', '$TCS', '$total', '$termsAndConditions', '$items', '$fileName')";
 
     $form = mysqli_query($conn, $sql);
-
-
-    if ($form) {
-        echo "Update";
-    } else {
-        echo "item Not Update";
-    }
+    
     header("Location: ../../invoice/all-invoice.php");
 }

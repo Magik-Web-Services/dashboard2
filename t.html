@@ -5,113 +5,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        /* comman */
-        .p-20 {
-            padding: 20px !important;
-        }
-
-        .pb-0 {
-            padding-bottom: 0px !important;
-        }
-
-        .pt-0 {
-            padding-top: 0px !important;
-        }
-
-        .flex_row {
-            display: flex;
-            flex-direction: row;
-        }
-
-        /* Heading */
-        .heading b {
-            font-size: 20px;
-            letter-spacing: 1px;
-            font-family: "nunito-bold", sans-serif;
-            color: #6c757d !important;
-        }
-
-        .heading small {
-            font-size: 20px;
-            color: #6c757d !important;
-        }
-
-        /* Bill */
-        .bill {
-            background-color: #9e9e9e !important;
-            color: white;
-            width: 50%;
-            border-bottom: 0px !important;
-        }
-
-        .bill b {
-            font-size: 20px;
-            letter-spacing: 1px;
-            font-weight: bolder;
-        }
-
-        /* Bill2 */
-        .bill2 {
-            width: 50%;
-            font-size: 18px;
-            letter-spacing: 1px;
-        }
-    </style>
 </head>
 
 <body>
-    <table cellpadding="0" border="0" cellspacing="0" style="width: 100%;margin: 0 auto;">
+    <table cellpadding="20" border="0" cellspacing="0" style="width: 100%;margin: 0 auto;">
         <tbody>
-        <!-- heading -->
-        <tr>
-            <td class="p-20 heading">
-                <b>Tax Invoice</b> <br>
-                <small>INV-001</small>
-            </td>
-        </tr>
-        <!-- Bill -->
-        <tr class="flex_row p-20 pb-0">
-            <td class="p-20 bill">
-                <b>Bill From</b>
-            </td>
-            <td class="p-20 bill">
-                <b>Bill to</b>
-            </td>
-        </tr>
-        <!-- Bill -->
-        <tr class="flex_row p-20 pt-0">
-            <td class="p-20 bill2">Person 1 <br>Amazon<br>India</td>
-            <td class="p-20 bill2">Person 2 <br> Mr. Akash Sharma <br> India</td>
-        </tr>
-        <!-- item -->
-        <tr>
-            <td class="p-20 item">
-                <table cellpadding="0" border="0" cellspacing="0" style="width: 100%;margin: 0 auto;">
-                    <tbody>
+            <tr>
+                <td><table cellpadding="0" border="0" cellspacing="0" style="width: 100%;">
+                        <tbody>
+                            <tr>
+                                <td><strong style="font-size: 18px; text-align: left;">Tax Invoice</strong><br>
+                                    <small style="font-size: 16px; text-align: left;">INV-001</small>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table></td>
+            </tr>
+            <tr>
+                <td><table cellpadding="20" border="0" cellspacing="0"
+                        style="width: 100%; background-color: #9e9e9e !important;color: white;">
                         <tr>
-                            <td><strong>Description</strong></td>
-                            <td><strong>Qty</strong></td>
-                            <td><strong>Price</strong></td>
-                            <td><strong>Total</strong></td>
+                            <td><h2>Bill From</h2></td>
+                            <td><h2>Bill To</h2></td>
                         </tr>
+                    </table>
+                    <table cellpadding="20" border="0" cellspacing="0" style="width: 100%;">
                         <tr>
-                            <td> Bags</td>
-                            <td>10</td>
-                            <td>$1,500</td>
-                            <td>$22,500</td>
+                            <td>Prson1<br>Amazon<br>India</td>
+                            <td>Prson2<br>Mr. Akash Sharma<br>India</td>
                         </tr>
-                        <tr>
-                            <td>Toys</td>
-                            <td>6</td>
-                            <td>$1,500</td>
-                            <td>$15,000</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </tbody>
+                    </table></td>
+            </tr>
+            <tr>
+                <td><table cellpadding="20" border="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td style="border-top: 2px solid black; border-left: 2px solid black;"><strong>Description</strong></td>
+                        <td style="border-top: 2px solid black;"><strong>Qty</strong></td>
+                        <td style="border-top: 2px solid black;"><strong>Price</strong></td>
+                        <td style="border-top: 2px solid black; border-right: 2px solid black;"><strong>Total</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: 2px solid black; border-left: 2px solid black;">Bags</td>
+                        <td style="border-top: 2px solid black;">10</td>
+                        <td style="border-top: 2px solid black;">$1,500</td>
+                        <td style="border-top: 2px solid black; border-right: 2px solid black;">$22,500</td>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom: 2px solid black; border-top: 2px solid black; border-left: 2px solid black;">Toys</td>
+                        <td style="border-bottom: 2px solid black; border-top: 2px solid black;">6</td>
+                        <td style="border-bottom: 2px solid black; border-top: 2px solid black;">$1,500</td>
+                        <td style="border-bottom: 2px solid black; border-top: 2px solid black; border-right: 2px solid black;">$15,000</td>
+                    </tr>
+                </table></td>
+            </tr>
+            <tr>
+                <td><table cellpadding="20" border="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td style="text-align: left; border-top: 2px solid black; border-left: 2px solid black;"><strong>Subtotal</strong></td>
+                        <td style="text-align: center; border-top: 2px solid black;"><strong>GST(10%)</strong></td>
+                        <td style="text-align: right; border-top: 2px solid black; border-right: 2px solid black;"><strong>Total</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left; border-bottom: 2px solid black; border-top: 2px solid black; border-left: 2px solid black;">$40,000</td>
+                        <td style="text-align: center; border-bottom: 2px solid black; border-top: 2px solid black;">2,500</td>
+                        <td style="text-align: right; border-bottom: 2px solid black; border-top: 2px solid black; border-right: 2px solid black;">$42,500</td>
+                    </tr>
+                </table></td>
+            </tr>
+            <tr><td><table>
+                <tbody>
+                    <tr>
+                        <td><strong>Bank Details</strong></td>
+                    </tr>
+                    <tr>
+                        <td> Bank Name : ADS BANK <br> Swift Code : ADS1234Q
+                            <br> Account Holder :ABC
+                            <br> Account Number : 5454542ABC <br>
+                        </td>
+                    </tr>
+                </tbody>
+            </table></td></tr>
+        </tbody>
     </table>
 </body>
 

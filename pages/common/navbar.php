@@ -67,7 +67,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
               <span>Lock Account</span>
               <i class="mdi mdi-lock ms-1"></i>
             </a>
-            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" id="Logout" href="#">
+            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" id="Logout" href="<?php echo SITE_URL ?>pages/logout.php">
               <span>Log Out</span>
               <i class="mdi mdi-logout ms-1"></i>
             </a>
