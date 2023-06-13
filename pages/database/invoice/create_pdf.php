@@ -14,20 +14,22 @@ if (isset($_GET['invoicepdf'])) {
     $discount2 = $row["discount2"];
     $Adjustment = $row["Adjustment"];
     $customerName = $row["customerName"];
+    // Img
+    if (!empty($row["files"])) {
     $logo_url = $row["files"];
+    $folder =     $folder =    "../../../assets/upload/invoice/". $logo_url;;
+    $logo_url = '<img src="' . $folder . '" height="80">';
+    }else{
+        $logo_url = '<img src="../../../assets/images/your_logo.png" height="80">';
+    }
 
-    $GST = (intval($subTotal) - (((intval($subTotal) * intval($Discount)) / 100))) - intval($subTotal) + intval($Adjustment);
+
+    $GST = (intval($subTotal) - intval($total));
 
     // Items
     $jsonitems = $row['items'];
     $objitems =  json_decode($jsonitems);
     $arrayitems = get_object_vars($objitems);
-
-
-    $items = '';
-    // echo "<pre>";
-    // print_r($arrayitems);
-    // echo "</pre>";
 
     $items = '';
     $x = 0;
@@ -42,11 +44,6 @@ if (isset($_GET['invoicepdf'])) {
         </tr>';
         $x++;
     }
-
-    // echo "<pre>";
-    // print_r($items);
-    // echo "</pre>";
-
 
     // Tittle
     $invoice_number = $row["invoice"];
@@ -87,10 +84,11 @@ if (isset($_GET['invoicepdf'])) {
     <tr>
         <td><table cellpadding="0" border="0" cellspacing="0" style="width: 100%;">
                 <tbody>
-                    <tr>
+                    <tr width="100%">
                         <td><strong style="font-size: 18px; text-align: left;">Tax Invoice</strong><br>
                             <small style="font-size: 16px; text-align: left;">INV-' . $invoice_number . '</small>
                         </td>
+                        <td style="text-align: right;">'.$logo_url.'</td>
                     </tr>
                 </tbody>
             </table></td>
@@ -118,19 +116,21 @@ if (isset($_GET['invoicepdf'])) {
                 <td style="border-top: 2px solid black;"><strong>Price</strong></td>
                 <td style="border-top: 2px solid black; border-right: 2px solid black;"><strong>Total</strong></td>
             </tr>
-      ' . $items . '
+            ' . $items . '
         </table></td>
     </tr>
     <tr>
         <td><table cellpadding="20" border="0" cellspacing="0" style="width: 100%;">
             <tr>
                 <td style="text-align: left; border-top: 2px solid black; border-left: 2px solid black;"><strong>Subtotal</strong></td>
-                <td style="text-align: center; border-top: 2px solid black;"><strong>GST(' . $Discount . '' . $discount2 . ')</strong></td>
+                <td style="text-align: center; border-top: 2px solid black;"><strong>GST</strong></td>
+                <td style="text-align: center; border-top: 2px solid black;"><strong>Adjustmenr</strong></td>
                 <td style="text-align: right; border-top: 2px solid black; border-right: 2px solid black;"><strong>Total</strong></td>
             </tr>
             <tr>
                 <td style="text-align: left; border-bottom: 2px solid black; border-top: 2px solid black; border-left: 2px solid black;">$' . $subTotal . '</td>
-                <td style="text-align: center; border-bottom: 2px solid black; border-top: 2px solid black;">' . $GST . '</td>
+                <td style="text-align: center; border-bottom: 2px solid black; border-top: 2px solid black;">' . $Discount . '' . $discount2 . '</td>
+                <td style="text-align: center; border-bottom: 2px solid black; border-top: 2px solid black;">' . $Adjustment . '</td>
                 <td style="text-align: right; border-bottom: 2px solid black; border-top: 2px solid black; border-right: 2px solid black;">$' . $total . '</td>
             </tr>
         </table></td>

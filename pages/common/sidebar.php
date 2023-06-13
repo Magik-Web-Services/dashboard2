@@ -8,7 +8,7 @@
       </a>
     </li>
     <?php
-    if ($_SESSION['username']  == "admin") {
+    if ($_SESSION['userRole']  == "admin") {
       $site = SITE_URL;
       echo '   
       <li class="nav-item">

@@ -32,7 +32,8 @@
                                 <select class="form-select form-control" name="CustomerName">
                                     <option selected>select customer</option>
                                     <?php
-                                    $sql = "SELECT * FROM `dashboard2_customers`";
+                                    $id = $_SESSION['userID'];
+                                    $sql = "SELECT * FROM `dashboard2_customers` WHERE `user_id`='$id'";
                                     $result = mysqli_query($conn, $sql);
                                     while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
@@ -188,7 +189,7 @@
                                         </div>
                                     </div>
                                     <div class="col upload-bg">
-                                        <input type="file" name="file[]" id="myFile"  accept="image/png, image/jpeg">
+                                        <input type="file" name="file[]" id="myFile" accept="image/png, image/jpeg">
                                         <p>Upload Your Logo</p>
                                     </div>
                                 </div>

@@ -28,7 +28,6 @@ if (isset($_POST['edituser'])) {
 
     $sql = "UPDATE `dashboard2_users` SET `userName`='$user_name',`email`='$user_email',`country`='$user_country',`password`='$hash',`role`='$user_role' WHERE `sno`='$user_id';";
     $form = mysqli_query($conn, $sql);
-
 }
 ?>
 

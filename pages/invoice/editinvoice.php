@@ -35,6 +35,18 @@ if (isset($_GET['invoiceEdit'])) {
                                 <label for="CustomerName" class="form-label">Customer name</label>
                                 <select class="form-select form-control" name="CustomerName">
                                     <option selected value="<?php echo $row2["customerName"] ?>"><?php echo $row2["customerName"] ?></option>
+                                    <?php
+                                    $id = $_SESSION['userID'];
+                                    $sql = "SELECT * FROM `dashboard2_customers` WHERE `user_id`='$id'";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                        <option value="<?php echo $row["firstName"];
+                                                        echo "&nbsp;";
+                                                        echo $row["lastName"]; ?>"><?php echo ucfirst($row["firstName"]);
+                                                                                    echo "&nbsp;";
+                                                                                    echo ucfirst($row["lastName"]); ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
 
@@ -247,7 +259,7 @@ if (isset($_GET['invoiceEdit'])) {
                             <div class="row">
                                 <div class="col-md-5">
                                     <label for="total" class="form-label">Total</label>
-                                    <input type="text" value="<?php echo $row2["Adjustment"] ?>" id="total" onchange="calculate2(this)" name="total" readonly class="form-control" placeholder="0.00">
+                                    <input type="text" value="<?php echo $row2["total"] ?>" id="total" onchange="calculate2(this)" name="total" readonly class="form-control" placeholder="0.00">
                                 </div>
                             </div>
 
@@ -261,7 +273,7 @@ if (isset($_GET['invoiceEdit'])) {
                                         </div>
                                     </div>
                                     <div class="col upload-bg">
-                                    <input type="file" name="file[]" id="myFile"  accept="image/png, image/jpeg">
+                                        <input type="file" name="file[]" id="myFile" accept="image/png, image/jpeg">
                                         <p>Upload Your Logo</p>
                                     </div>
                                 </div>
@@ -323,6 +335,8 @@ if (isset($_GET['invoiceEdit'])) {
                             dataId: dataId
                         },
                         success: function(response) {
+                            // Name
+                            jQuery("#" + jQuery(ele)[0].childNodes[1].childNodes[1].id).val(response[0].name)
                             // Unit
                             jQuery("#" + jQuery(ele)[0].childNodes[5].childNodes[0].id).val(response[0].unit)
                             // Rate

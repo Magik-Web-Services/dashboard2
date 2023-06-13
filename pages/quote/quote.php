@@ -30,7 +30,8 @@
                                 <select class="form-select form-control" name="CustomerName">
                                     <option disabled>select customer</option>
                                     <?php
-                                    $sql = "SELECT * FROM `dashboard2_customers`";
+                                    $id = $_SESSION['userID'];
+                                    $sql = "SELECT * FROM `dashboard2_customers` WHERE `user_id`='$id'";
                                     $result = mysqli_query($conn, $sql);
                                     while ($row = mysqli_fetch_assoc($result)) {
                                     ?>

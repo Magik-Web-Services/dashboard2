@@ -107,7 +107,7 @@ $(document).ready(function () {
         })
     })
 
-        // inoice
+    // inoice
 
     // invoicedelete
     let invoicedelete = jQuery('.invoicedelete');
@@ -120,24 +120,24 @@ $(document).ready(function () {
         })
     })
 
-        // invoiceEdit
-        let invoiceEdit = jQuery('.invoiceEdit');
-        Array.from(invoiceEdit).forEach(element => {
-            element.addEventListener("click", (e) => {
-                sno = e.target.id
-                window.location = `../../pages/invoice/editinvoice.php?invoiceEdit=${sno}`;
-            })
+    // invoiceEdit
+    let invoiceEdit = jQuery('.invoiceEdit');
+    Array.from(invoiceEdit).forEach(element => {
+        element.addEventListener("click", (e) => {
+            sno = e.target.id
+            window.location = `../../pages/invoice/editinvoice.php?invoiceEdit=${sno}`;
         })
-        // invoicepdf
-        let invoicepdf = jQuery('.invoicepdf');
-        Array.from(invoicepdf).forEach(element => {
-            element.addEventListener("click", (e) => {
-                sno = e.target.id
-                if (confirm("Are you sure create a PDF file")) {
-                    window.location = `../../pages/database/invoice/create_pdf.php?invoicepdf=${sno}`;
-                }
-            })
+    })
+    // invoicepdf
+    let invoicepdf = jQuery('.invoicepdf');
+    Array.from(invoicepdf).forEach(element => {
+        element.addEventListener("click", (e) => {
+            sno = e.target.id
+            if (confirm("Are you sure create a PDF file")) {
+                window.location = `../../pages/database/invoice/create_pdf.php?invoicepdf=${sno}`;
+            }
         })
+    })
 
     // Logout
 
@@ -153,20 +153,20 @@ $(document).ready(function () {
         listitems_c = parseInt(listitems_c) + 1;
         jQuery('#item_count').val(listitems_c);
         var extend_items = `
-        <tr class="listitems" id="itemId_${listitems_c}">
-        <td>
-            <input type="hidden" id="item_name_${listitems_c}" name="name[]">
-            <select class="selItem" id="item_item_${listitems_c}" style='width: 200px;'>
-                <option disabled value='0'>- Search Item -</option>
-            </select>
-        </td>
-        <td><input onchange="calculate(this)" id="item_qty_${listitems_c}" class="qty" name="qty[]" type="number" value="1" name="qty"></td>
-        <td><input id="item_unit_${listitems_c}" class="unit" readonly type="text" name="unit[]"></td>
-        <td><input onchange="calculate(this)" readonly id="item_rate_${listitems_c}" class="rate" type="number" value="0" name="rate[]"></td>
-        <td><input onchange="calculate(this)" readonly id="item_amount_${listitems_c}" class="amount" type="number" value="0" name="amount[]"></td>
-        <td><input id="item_delete_${listitems_c}" type="button" value="delete" onclick="deleteRow(this)" /></td>
-    </tr>
-    `;
+<tr class="listitems" id="itemId_${listitems_c}">
+<td>
+<input type="hidden" id="item_name_${listitems_c}" name="name[]">
+<select class="selItem" id="item_item_${listitems_c}" style='width: 200px;'>
+<option disabled value='0'>- Search Item -</option>
+</select>
+</td>
+<td><input onchange="calculate(this)" id="item_qty_${listitems_c}" class="qty" name="qty[]" type="number" value="1" name="qty"></td>
+<td><input id="item_unit_${listitems_c}" class="unit" readonly type="text" name="unit[]"></td>
+<td><input onchange="calculate(this)" readonly id="item_rate_${listitems_c}" class="rate" type="number" value="0" name="rate[]"></td>
+<td><input onchange="calculate(this)" readonly id="item_amount_${listitems_c}" class="amount" type="number" value="0" name="amount[]"></td>
+<td><input id="item_delete_${listitems_c}" type="button" value="delete" onclick="deleteRow(this)" /></td>
+</tr>
+`;
 
         jQuery('#employee-table tbody').append(extend_items);
         Ajax()
@@ -209,37 +209,50 @@ function calculate(id) {
     });
     jQuery('#Sub_Total').val(each_item_price);
     jQuery('#total').val(each_item_price);
+    calculate2();
 }
 
 function calculate2(id) {
-    let item_id = id.id,
+    let calculate2_id = id;
+    if (calculate2_id == 'undefined') {
+        console.log("calculate21");
+        let item_id = id.id,
+            Sub_Total = jQuery('#Sub_Total').val() ? jQuery('#Sub_Total').val() : 0,
+            Discount = jQuery('#Discount').val() ? jQuery('#Discount').val() : 0,
+            Adjustment = jQuery('#Adjustment').val() ? jQuery('#Adjustment').val() : 0,
+            tax = jQuery('#selectTax').find(':selected').val()
+
+        if (item_id) {
+            switch (item_id) {
+                case 'Discount':
+                    switch (tax) {
+                        case '$':
+                            let discount$ = parseInt(Sub_Total) - parseInt(Discount) + parseInt(Adjustment);
+                            jQuery('#total').val(discount$);
+                            break;
+                        case '%':
+                            let dis = parseInt(Sub_Total) - (((parseInt(Sub_Total) * parseInt(Discount)) / 100)) + parseInt(Adjustment);
+                            jQuery('#total').val(dis);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 'Adjustment':
+                    var Dis = (tax == "%") ? (parseInt(Sub_Total) - ((parseInt(Sub_Total) * parseInt(Discount)) / 100) + parseInt(Adjustment)) : (parseInt(Sub_Total) - parseInt(Discount) + parseInt(Adjustment))
+
+                    jQuery('#total').val(Dis);
+                    break;
+            }
+        }
+    } else {
         Sub_Total = jQuery('#Sub_Total').val() ? jQuery('#Sub_Total').val() : 0,
         Discount = jQuery('#Discount').val() ? jQuery('#Discount').val() : 0,
         Adjustment = jQuery('#Adjustment').val() ? jQuery('#Adjustment').val() : 0,
         tax = jQuery('#selectTax').find(':selected').val()
+        var Dis = (tax == "%") ? (parseInt(Sub_Total) - ((parseInt(Sub_Total) * parseInt(Discount)) / 100) + parseInt(Adjustment)) : (parseInt(Sub_Total) - parseInt(Discount) + parseInt(Adjustment))
 
-    if (item_id) {
-        switch (item_id) {
-            case 'Discount':
-                switch (tax) {
-                    case '$':
-                        let discount$ = parseInt(Sub_Total) - parseInt(Discount) + parseInt(Adjustment);
-                        jQuery('#total').val(discount$);
-                        break;
-                    case '%':
-                        let dis = parseInt(Sub_Total) - (((parseInt(Sub_Total) * parseInt(Discount)) / 100)) + parseInt(Adjustment);
-                        jQuery('#total').val(dis);
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 'Adjustment':
-                var Dis = (tax == "%") ? (parseInt(Sub_Total) - ((parseInt(Sub_Total) * parseInt(Discount)) / 100) + parseInt(Adjustment)) : (parseInt(Sub_Total) - parseInt(Discount) + parseInt(Adjustment))
-                
-                jQuery('#total').val(Dis);
-                break;
-        }
+        jQuery('#total').val(Dis);
     }
 }
 
