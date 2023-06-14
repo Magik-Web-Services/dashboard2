@@ -1,6 +1,6 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
-    <li class="nav-item nav-category">Main</li>
+    <li class="nav-item nav-category"></li>
     <li class="nav-item">
       <a class="nav-link" href="<?php echo SITE_URL; ?>pages/dashboard.php">
         <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
@@ -47,7 +47,7 @@
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="<?php echo SITE_URL; ?>pages/invoice/all-invoice.php">All Invoices</a></li>
-          <li class="nav-item"> <a class="nav-link" href="<?php echo SITE_URL; ?>pages/invoice/add-invoice.php">Add Invoice</a></li>
+          <!-- <li class="nav-item"> <a class="nav-link" href="<?php echo SITE_URL; ?>pages/invoice/add-invoice.php">Add Invoice</a></li> -->
           <li class="nav-item"> <a class="nav-link" href="<?php echo SITE_URL; ?>pages/invoice/new-invoice.php">Add New Invoice</a></li>
 
 

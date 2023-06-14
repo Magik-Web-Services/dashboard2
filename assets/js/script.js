@@ -247,9 +247,9 @@ function calculate2(id) {
         }
     } else {
         Sub_Total = jQuery('#Sub_Total').val() ? jQuery('#Sub_Total').val() : 0,
-        Discount = jQuery('#Discount').val() ? jQuery('#Discount').val() : 0,
-        Adjustment = jQuery('#Adjustment').val() ? jQuery('#Adjustment').val() : 0,
-        tax = jQuery('#selectTax').find(':selected').val()
+            Discount = jQuery('#Discount').val() ? jQuery('#Discount').val() : 0,
+            Adjustment = jQuery('#Adjustment').val() ? jQuery('#Adjustment').val() : 0,
+            tax = jQuery('#selectTax').find(':selected').val()
         var Dis = (tax == "%") ? (parseInt(Sub_Total) - ((parseInt(Sub_Total) * parseInt(Discount)) / 100) + parseInt(Adjustment)) : (parseInt(Sub_Total) - parseInt(Discount) + parseInt(Adjustment))
 
         jQuery('#total').val(Dis);
