@@ -13,18 +13,7 @@ if (isset($_GET['invoicepdf'])) {
     $Discount = $row["Discount"];
     $discount2 = $row["discount2"];
     $Adjustment = $row["Adjustment"];
-
     $customerName = $row["customerName"];
-
-    $fname = substr($customerName, 0, 4);
-    $lname = substr($customerName, 6, 10);
-    $sql = "SELECT * FROM `dashboard2_customers` WHERE `firstName`='$fname' OR `lastName`='$lname'";
-    $sql2 = mysqli_query($conn, $sql);
-    $row2 = $sql2->fetch_assoc();
-    $companyName = strtoupper($row2['companyName']);
-    $CustomerEmail = $row2['customerEmail'];
-    $CustomerPhone = $row2['customerPhone'];
-
     $creation_Date = $row["creation_Date"];
     // Img
     if (!empty($row["files"])) {
@@ -49,10 +38,10 @@ if (isset($_GET['invoicepdf'])) {
 
         $items .= '     
         <tr>
-        <th style="border: 1px solid #e3e2e2; width: 150px;">' . $arrayitems["name"][$x] . '</th>
-        <th style="border: 1px solid #e3e2e2; width: 150px;">' . $arrayitems["qty"][$x] . '</th>
-        <th style="border: 1px solid #e3e2e2; width: 150px;">' . $arrayitems["rate"][$x] . '</th>
-        <th style="border: 1px solid #e3e2e2; width: 150px; text-align: right;">' . $arrayitems["amount"][$x] . '</th>
+        <th style="border-bottom: 1px solid #edf0f9; width: 150px;">' . $arrayitems["name"][$x] . '</th>
+        <th style="border-bottom: 1px solid #edf0f9; width: 150px;">' . $arrayitems["qty"][$x] . '</th>
+        <th style="border-bottom: 1px solid #edf0f9; width: 150px;">' . $arrayitems["rate"][$x] . '</th>
+        <th style="border-bottom: 1px solid #edf0f9; width: 150px; text-align: right;">' . $arrayitems["amount"][$x] . '</th>
         </tr>';
         $x++;
     }
@@ -91,35 +80,35 @@ if (isset($_GET['invoicepdf'])) {
 
     // set some text to print
     $content = '
-    <table cellpadding="20" border="0" cellspacing="0" style="width: 100%;margin: 0 auto;">    
-    <tbody>
+    <table cellpadding="20" border="0" cellspacing="0" style="width: 100%;margin: 0 auto;">
+    <thead>
     <tr>
-        <th style="text-align: left;">'.$logo_url.'</th>
-        <th><strong style="font-size: 24px;">'.$companyName.' </strong> </th>
+        <td style="text-align: left; border-bottom: 1px solid black;">'.$logo_url.'</td>
+        <th style="border-bottom: 1px solid black;"> <br> <br>
+            '.$creation_Date.' <br>
+            <strong>Invoice #: INV-'.$invoice_number.' </strong> 
+        </th>
     </tr>
-    <tr>
-        <td style="text-align: left; width: 28%;">
-            <span style="font-size: 18px;">Invoice ID:</span><br>
-            <span style="font-size: 18px;">Order Number:</span><br>
-            <span style="font-size: 18px;">Creation Date:</span>
-        </td>
-        <td style="text-align: left; width: 60%;">
-            <span style="font-size: 18px;">'.$invoice_number.'</span> <br>
-            <span style="font-size: 18px;">'.$order_number.'</span> <br>
-            <span style="font-size: 18px;">'.$creation_Date.'</span>
-        </td>
-    </tr>
-    <tr>
-        <th style="text-align: left; width: 13%;"><strong style="font-size: 14px; line-height: 10px;">From:</strong></th>
-        <th style="width: 40%;">'.$customerName.' <br>'.$CustomerEmail.' <br> '.$CustomerPhone.'</th>
+</thead>
+<tbody>
+<tr>
+    <th style="border-bottom: 1px dotted black; text-align: left;">
+        <strong style="font-size: 20px; line-height: 10px;">Bill To:</strong>
 
-        <th style="text-align: left; width: 15%;"><strong style="font-size: 14px; line-height: 10px;">To:</strong></th>
-        <th> MWS <br> mws@gmail.com <br> 123456</th>
-    </tr>
-    <tr>
+        <p style="font-size: 14px; font-weight: bold; line-height: 20px;">&nbsp;Company Name </p>
+        <p style="font-size: 14px; line-height: -20px;"> '.$customerName.' </p>
+    </th>
+    <th style="border-bottom: 1px dotted black;">
+        <strong style="font-size: 20px; line-height: 10px;">Bill From:</strong>
+
+        <p style="font-size: 14px; font-weight: bold; line-height: 20px;">&nbsp;Company Name </p>
+        <p style="font-size: 14px; line-height: -20px;"> Magik Web Service </p>
+    </th>
+</tr>
+<tr>
     <td><table cellpadding="20" border="0" cellspacing="0" style="width: 100%; margin: 0 auto;">
             <thead>
-                <tr style="background-color: #cfe2f3;">
+                <tr style="background-color: #e0d0b6;">
                     <th style="width: 150px; font-weight: bold;">Name</th>
                     <th style="width: 150px; font-weight: bold;">Qty</th>
                     <th style="width: 150px; font-weight: bold;">Price</th>
@@ -128,16 +117,15 @@ if (isset($_GET['invoicepdf'])) {
             </thead>
             <tbody>
             '. $items.'
-            </tbody>
+            <./tbody>
         </table>
     </td>
-    </tr>
-    <tr>
-        <td style="width: 55%; text-align: right; font-weight: bold;"></td>
-        <td style="border: 1px solid #e3e2e2; width: 75%; text-align: right; font-weight: bold;">SubTotal</td>
-        <td style="border: 1px solid #e3e2e2; width: 25%; text-align: right;">'. $subTotal .'</td>
-    </tr>
+</tr>
 <tfoot>
+    <tr>
+        <td style="width: 65%; text-align: right; font-weight: bold;">SubTotal</td>
+        <td style="width: 35%; text-align: right;">'. $subTotal .'</td>
+    </tr>
     <tr>
         <td style="line-height: -45px; width: 65%; text-align: right; font-weight: bold;">GST</td>
         <td style="line-height: -45px; width: 35%; text-align: right;">' . $Discount . '' . $discount2 . '</td>

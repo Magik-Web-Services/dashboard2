@@ -24,6 +24,8 @@ include("config.php");
     <link rel="stylesheet" href="<?php echo INV_ASSETS; ?>/css/custom_style.css">
     <!-- js-bt--links -->
 
+    <link rel="icon" href="<?php echo INV_ASSETS; ?>/images/icon.png" sizes="192x192" />
+
     <!-- fontawsome-cdn-link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- fontawsome-cdn-link -->
