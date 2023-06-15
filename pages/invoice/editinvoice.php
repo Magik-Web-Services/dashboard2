@@ -26,7 +26,7 @@ if (isset($_GET['invoiceEdit'])) {
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="page-header">
-                        <h3 class="page-title"> New Invoices </h3>
+                        <h3 class="page-title"> Edit Invoices </h3>
                     </div>
                     <div class="f-row row">
                         <form class="row" method="POST" action="../database/invoice/editInvoice.php?editInvoice=<?php echo $sno; ?>" enctype="multipart/form-data">
@@ -42,9 +42,9 @@ if (isset($_GET['invoiceEdit'])) {
                                     while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
                                         <option value="<?php echo $row["firstName"];
-                                                        echo "&nbsp;";
+                                                        echo " ";
                                                         echo $row["lastName"]; ?>"><?php echo ucfirst($row["firstName"]);
-                                                                                    echo "&nbsp;";
+                                                                                    echo " ";
                                                                                     echo ucfirst($row["lastName"]); ?></option>
                                     <?php } ?>
                                 </select>

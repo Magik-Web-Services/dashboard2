@@ -36,9 +36,9 @@
                                     while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
                                         <option value="<?php echo $row["firstName"];
-                                                        echo "&nbsp;";
+                                                        echo " ";
                                                         echo $row["lastName"]; ?>"><?php echo ucfirst($row["firstName"]);
-                                                                                    echo "&nbsp;";
+                                                                                    echo " ";
                                                                                     echo ucfirst($row["lastName"]); ?></option>
                                     <?php } ?>
                                 </select>
