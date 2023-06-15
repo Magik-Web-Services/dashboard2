@@ -161,7 +161,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <label for="Adjustment" class="form-label">Adjustment</label>
-                                    <input type="text" id="Adjustment" name="Adjustment" onchange="calculate2(this)" class="form-control" placeholder="0.00">
+                                    <input type="number" id="Adjustment" name="Adjustment" onchange="calculate2(this)" class="form-control" placeholder="0.00">
                                 </div>
                                 <div class="col-md-5">
                                     <label for="TCS" class="form-label">TCS</label>
@@ -175,7 +175,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <label for="total" class="form-label">Total</label>
-                                    <input type="text" id="total" onchange="calculate2(this)" name="total" readonly class="form-control" placeholder="0.00">
+                                    <input type="number" id="total" onchange="calculate2(this)" name="total" readonly class="form-control" placeholder="0.00">
                                 </div>
                             </div>
 
@@ -205,8 +205,7 @@
                     <footer class="footer">
                         <div class="footer-inner-wraper">
                             <div class="d-sm-flex justify-content-center justify-content-sm-between py-2">
-                                     <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2023</span>
-                                
+                                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2023</span>
                             </div>
                         </div>
                     </footer>

@@ -148,7 +148,7 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <label for="Adjustment" class="form-label">Adjustment</label>
-                                        <input type="text" id="Adjustment" required name="Adjustment" onchange="calculate2(this)" class="form-control" placeholder="0.00">
+                                        <input type="number" id="Adjustment" required name="Adjustment" onchange="calculate2(this)" class="form-control" placeholder="0.00">
                                     </div>
                                     <div class="col-md-5">
                                         <label for="TCS" class="form-label">TCS</label>
@@ -215,6 +215,7 @@
                     delay: 250,
                     data: function(params) {
                         let ele = this[0].parentNode.parentNode.id
+                        // console.log(ele);
                         return {
                             searchTerm: params.term, // search term
                             Element: ele

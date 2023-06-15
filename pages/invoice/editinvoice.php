@@ -233,7 +233,7 @@ if (isset($_GET['invoiceEdit'])) {
                             <div class="row">
                                 <div class="col-md-5">
                                     <label for="Adjustment" class="form-label">Adjustment</label>
-                                    <input type="text" id="Adjustment" value="<?php echo $row2["Adjustment"] ?>" name="Adjustment" onchange="calculate2(this)" class="form-control" placeholder="0.00">
+                                    <input type="number" id="Adjustment" value="<?php echo $row2["Adjustment"] ?>" name="Adjustment" onchange="calculate2(this)" class="form-control" placeholder="0.00">
                                 </div>
                                 <div class="col-md-5">
                                     <label for="TCS" class="form-label">TCS</label>
